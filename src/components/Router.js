@@ -12,7 +12,7 @@ function Router() {
                     <LoginPage/>
                 </Route>
                 <Route exact path = "/sign-up">
-                    <SinupPage/>
+                    <SignupPage/>
                 </Route>
                 <Route exact path = "/address">
                     <AddressPage/>
