@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
+import { ContainerLogin, LogoImg, ContainerTitulo, TituloLogin, ContainerInputs, StyledTextField, StyledOutlinedInput, StyledButton, ReturnButton, ButtonContainer} from './styles'
 import Logo from '../../Images/logo-future-eats-invert.svg'
-import {ContainerLogin, LogoImg, TituloLogin, ContainerTitulo, StyledTextField, ContainerInputs, StyledOutlinedInput, StyledButton, SignUpTitle, SignUpButton} from './styles'
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { useHistory } from "react-router-dom";
 
-function LoginPage() {
+function SinupPage() {
   const history = useHistory();
   const [values, setValues] = useState({showPassword: false})
   const handleChange = (prop) => (event) => {
@@ -24,20 +25,30 @@ function LoginPage() {
     event.preventDefault();
   };
 
-  const goToProfileAdressPage = () => {
-    history.push("/profile-page/edit/address")
+  const goToLoginPage = () => {
+    history.push("/login")
   }
-
-  const goToSignUpPage = () => {
-    history.push("/sign-up")
-  }
-
   return (
     <ContainerLogin>
+      <ButtonContainer>
+        <ReturnButton onClick={goToLoginPage}> <ArrowBackIosIcon/> </ReturnButton>
+      </ButtonContainer>        
       <LogoImg src={Logo} />
       <ContainerTitulo>
-        <TituloLogin>Entrar</TituloLogin>
+        <TituloLogin>Cadastrar</TituloLogin>
       </ContainerTitulo>
+      <ContainerInputs>
+        <StyledTextField 
+          label="Nome"
+          placeholder="Nome e sobrenome"
+          margin="normal"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          variant="outlined"
+          required
+        />
+      </ContainerInputs>
       <ContainerInputs>
         <StyledTextField 
           label="E-mail"
@@ -51,8 +62,20 @@ function LoginPage() {
         />
       </ContainerInputs>
       <ContainerInputs>
+        <StyledTextField 
+          label="CPF"
+          placeholder="000.000.000-00"
+          margin="normal"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          variant="outlined"
+          required
+        />
+      </ContainerInputs>
+      <ContainerInputs>
         <FormControl variant="outlined">
-          <InputLabel required shrink="true">Senha</InputLabel>
+          <InputLabel required >Senha</InputLabel>
           <StyledOutlinedInput
             type={values.showPassword ? 'text' : 'password'}
             value={values.password}
@@ -76,10 +99,35 @@ function LoginPage() {
           />
         </FormControl>
       </ContainerInputs>
-      <StyledButton onClick={goToProfileAdressPage}>Entrar</StyledButton>
-      <SignUpTitle>Não possui cadastro? Clique <SignUpButton onClick={goToSignUpPage}>aqui.</SignUpButton></SignUpTitle>
+      <ContainerInputs>
+        <FormControl variant="outlined" >
+          <InputLabel required >Confirmar</InputLabel>
+          <StyledOutlinedInput
+            type={values.showPassword ? 'text' : 'password'}
+            value={values.password}
+            onChange={handleChange('password')}
+            label="Senha"
+            placeholder="Confirme a senha anterior"
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+            labelWidth={70}
+            required
+          />
+        </FormControl>
+      </ContainerInputs>
+      <StyledButton>Criar</StyledButton>
     </ContainerLogin>
   );
 }
 
-export default LoginPage;
+export default SinupPage;
