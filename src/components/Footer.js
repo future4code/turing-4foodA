@@ -17,12 +17,21 @@ const FooterContainer = styled.div`
 const HomeIconFooter = styled(HomeIcon)`
     color: #BDBDBD;
 `
+
+const ShoppingCartOutlinedIconFooter = styled(ShoppingCartOutlinedIcon)`
+    color: #BDBDBD;
+`
+
+const PersonOutlineIconFooter = styled(PersonOutlineIcon)`
+    color: #BDBDBD;
+`
+
 function Footer(props){
     return(
         <FooterContainer>
             <HomeIconFooter fontSize="large" cursor="pointer" color={props.color}/>
-            <ShoppingCartOutlinedIcon color="disabled" fontSize="large" cursor="pointer"/>
-            <PersonOutlineIcon color="disabled" fontSize="large" cursor="pointer"/>
+            <ShoppingCartOutlinedIconFooter color="disabled" fontSize="large" cursor="pointer"/>
+            <PersonOutlineIconFooter color="disabled" fontSize="large" cursor="pointer"/>
         </FooterContainer>
     )
 }
