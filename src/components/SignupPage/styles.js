@@ -51,7 +51,6 @@ export const StyledTextField = styled(TextField)`
     width: 20.5rem;
 `
 
-
 export const StyledButton = styled.button`
     width: 20.5rem;
     height: 2.625rem;
