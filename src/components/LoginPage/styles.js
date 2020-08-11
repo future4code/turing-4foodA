@@ -5,6 +5,7 @@ export const ContainerLogin = styled.div`
     display: flex;
     flex-direction: column;
     font-family: 'Roboto';
+    text-align:center;
 `
 
 export const LogoImg = styled.img`
@@ -57,13 +58,14 @@ export const StyledButton = styled.button`
     border-radius: 2px;
     background-color: #e8222e;
     border: none;
-    margin: 0 auto;
+    text-align: center;
 `
 
 export const SignUpTitle = styled.p`
     text-align: center;
     font-size: 1rem;
     font-family: 'Roboto';
+    
 `
 
 export const SignUpButton = styled.button`

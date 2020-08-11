@@ -2,14 +2,12 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import styled from 'styled-components'
-import Logo from '../../Images/logo-future-eats-invert.svg'
 
 const DivSignup = styled.div`
     width: 22.5rem;
     height: 40rem;
     border: 1px solid black;
     margin: 0 auto;
-
 `
 
 const FormSignup = styled.form`

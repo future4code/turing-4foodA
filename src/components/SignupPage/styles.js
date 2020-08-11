@@ -73,4 +73,6 @@ export const ReturnButton = styled.button`
 export const ButtonContainer = styled.div`
     width: 100%;
     border-bottom: 1px solid lightgrey;
+    display: flex;
+    justify-content: flex-start;
 `
