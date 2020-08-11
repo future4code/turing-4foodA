@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { ContainerLogin, LogoImg, ContainerTitulo, TituloLogin, ContainerInputs, StyledTextField, StyledButton, ReturnButton, ButtonContainer} from './styles'
-import Logo from '../../Images/logo-future-eats-invert.svg'
+import Logo from '../../Images/logo-future-eats@3x.png'
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';

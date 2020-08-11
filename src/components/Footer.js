@@ -5,9 +5,9 @@ import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import styled from 'styled-components'
 
 const FooterContainer = styled.div`
-    width: 22.5rem;
     height: 3.062rem;
-    border: 1px solid #BDBDBD;
+    border-top: 1px solid #BDBDBD;
+    border-bottom: 1px solid #BDBDBD;
     display: flex;
     justify-content: space-around;
     align-items: center;
