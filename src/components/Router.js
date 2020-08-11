@@ -9,6 +9,8 @@ import ProfileEditPage from "./ProfileEditPage/index";
 import ProfileAddressPage from "./ProfileAddressPage/index";
 import RestaurantDetailPage from "./RestaurantDetailPage/index";
 import RestaurantPage from "./RestaurantPage/index";
+
+import SearchPage from "./SearchPage/index";
 import SignupPage from "./SignupPage/index";
 
 function Router() {
@@ -29,6 +31,9 @@ function Router() {
                 </Route>
                 <Route exact path = "/restaurant">
                     <RestaurantPage/>
+                </Route>
+                <Route exact path = "/search-restaurant">
+                    <SearchPage/>
                 </Route>
                 <Route exact path = "/restaurant/details">
                     <RestaurantDetailPage/>
