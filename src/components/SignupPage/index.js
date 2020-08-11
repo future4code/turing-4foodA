@@ -1,136 +1,133 @@
-import React from 'react'
-import TextField from '@material-ui/core/TextField'
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import styled from 'styled-components'
+import React, {useState} from 'react';
+import { ContainerLogin, LogoImg, ContainerTitulo, TituloLogin, ContainerInputs, StyledTextField, StyledButton, ReturnButton, ButtonContainer} from './styles'
 import Logo from '../../Images/logo-future-eats-invert.svg'
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import { useHistory } from "react-router-dom";
 
-const DivSignup = styled.div`
-    width: 22.5rem;
-    height: 40rem;
-    border: 1px solid black;
-    margin: 0 auto;
+function SinupPage() {
+  const history = useHistory();
+  const [values, setValues] = useState({showPassword: false})
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
 
-`
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
 
-const FormSignup = styled.form`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    height: 32rem;
-`
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
-const ButtonCreate = styled.button`
-    width: 20.5rem;
-    height: 2.625rem;
-    border-radius: 2px;
-    background-color: red;
-    border: none;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1rem;
-`
-
-const TextFieldSignup = styled(TextField)`
-    width: 20.5rem;
-    height: 3.5rem;
-`
-
-const TitleSignup = styled.p`
-    width: 18.5rem;
-    height: 1.125rem;
-    font-family: Roboto;
-    font-size: 1rem;
-    font-weight: 500;
-    margin: 0 auto;
-`
-
-const DivArrowBack = styled.div`
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-left: 20px;
-    height: 3rem;
-`
-
-const DivTitle = styled.div`
-    height: 2.625rem;
-`
-
-function SignupPage (){
-    return(
-        <DivSignup>
-            <DivArrowBack>
-                <ArrowBackIosIcon cursor="pointer"/>
-            </DivArrowBack>
-            <hr/>
-            <DivTitle>
-                <TitleSignup>Meu endereço</TitleSignup>
-            </DivTitle>
-                <FormSignup  noValidate autoComplete="off">
-                    <TextFieldSignup
-                        required
-                        id="outlined-required"
-                        label="Logradouro"
-                        placeholder="Rua / Av."
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        variant="outlined"
-                    />
-                    <TextFieldSignup
-                        required
-                        id="outlined-required"
-                        label="Número"
-                        placeholder="Número"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        variant="outlined"
-                    />
-                    <TextFieldSignup
-                        required
-                        id="outlined-required"
-                        label="Complemento"
-                        placeholder="Apto. / Bloco"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        variant="outlined"
-                    />
-                    <TextFieldSignup
-                        required
-                        id="outlined-required"
-                        label="Bairro"
-                        placeholder="Bairro"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        variant="outlined"
-                    />
-                    <TextFieldSignup
-                        required
-                        id="outlined-required"
-                        label="Cidade"
-                        placeholder="Cidade"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        variant="outlined"
-                    />
-                    <TextFieldSignup
-                        required
-                        id="outlined-required"
-                        label="Estado"
-                        placeholder="Estado"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        variant="outlined"
-                    />
-                    <ButtonCreate>Criar</ButtonCreate>
-                </FormSignup>
-        </DivSignup>
-    )
+  const goToLoginPage = () => {
+    history.push("/login")
+  }
+  return (
+    <ContainerLogin>
+      <ButtonContainer>
+        <ReturnButton onClick={goToLoginPage}> <ArrowBackIosIcon/> </ReturnButton>
+      </ButtonContainer>        
+      <LogoImg src={Logo} />
+      <ContainerTitulo>
+        <TituloLogin>Cadastrar</TituloLogin>
+      </ContainerTitulo>
+      <ContainerInputs>
+        <StyledTextField 
+          label="Nome"
+          placeholder="Nome e sobrenome"
+          margin="normal"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          variant="outlined"
+          required
+        />
+      </ContainerInputs>
+      <ContainerInputs>
+        <StyledTextField 
+          label="E-mail"
+          placeholder="email@email.com"
+          margin="normal"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          variant="outlined"
+          required
+        />
+      </ContainerInputs>
+      <ContainerInputs>
+        <StyledTextField 
+          label="CPF"
+          placeholder="000.000.000-00"
+          margin="normal"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          variant="outlined"
+          required
+        />
+      </ContainerInputs>
+      <ContainerInputs>
+          <StyledTextField
+            type={values.showPassword ? 'text' : 'password'}
+            value={values.password}
+            onChange={handleChange('password')}
+            label="Senha"
+            placeholder="Mínimo 6 caracteres"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+              )}}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+            required
+          />
+      </ContainerInputs>
+      <ContainerInputs>
+          <StyledTextField
+            type={values.showPassword ? 'text' : 'password'}
+            value={values.password}
+            onChange={handleChange('password')}
+            label="Confirmar"
+            placeholder="Confirme a senha anterior"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+              )}}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+            required
+          />
+      </ContainerInputs>
+      <StyledButton>Criar</StyledButton>
+    </ContainerLogin>
+  );
 }
 
-export default SignupPage
+export default SinupPage;
