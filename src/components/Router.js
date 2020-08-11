@@ -1,5 +1,17 @@
-import React from 'react'
-import { Switch, Route, BrowserRouter } from 'react-router-dom'
+import React from 'react';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import AddressPage from "./AddressPage/index";
+import CarPage from "./CarPage/index";
+import Home from "./Home/index";
+import LoginPage from "./LoginPage/index";
+import ProfilePage from "./ProfilePage/index";
+import ProfileEditPage from "./ProfileEditPage/index";
+import ProfileAddressPage from "./ProfileAddressPage/index";
+import RestaurantDetailPage from "./RestaurantDetailPage/index";
+import RestaurantPage from "./RestaurantPage/index";
+
+import SearchPage from "./SearchPage/index";
+import SignupPage from "./SignupPage/index";
 
 function Router() {
     return(
@@ -12,13 +24,16 @@ function Router() {
                     <LoginPage/>
                 </Route>
                 <Route exact path = "/sign-up">
-                    <SinupPage/>
+                    <SignupPage/>
                 </Route>
                 <Route exact path = "/address">
                     <AddressPage/>
                 </Route>
                 <Route exact path = "/restaurant">
                     <RestaurantPage/>
+                </Route>
+                <Route exact path = "/search-restaurant">
+                    <SearchPage/>
                 </Route>
                 <Route exact path = "/restaurant/details">
                     <RestaurantDetailPage/>
