@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Logo from '../../Images/logo-future-eats-invert.svg'
-import {ContainerLogin, LogoImg, TituloLogin, ContainerTitulo, StyledTextField, ContainerInputs, StyledOutlinedInput, StyledButton, SignUpTitle, SignUpButton} from './styles'
+import {ContainerLogin, LogoImg, TituloLogin, ContainerTitulo, StyledTextField, ContainerInputs, StyledButton, SignUpTitle, SignUpButton} from './styles'
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
@@ -51,16 +51,15 @@ function LoginPage() {
         />
       </ContainerInputs>
       <ContainerInputs>
-        <FormControl variant="outlined">
-          <InputLabel required shrink="true">Senha</InputLabel>
-          <StyledOutlinedInput
+          <StyledTextField
             type={values.showPassword ? 'text' : 'password'}
             value={values.password}
             onChange={handleChange('password')}
             label="Senha"
             placeholder="Mínimo 6 caracteres"
-            endAdornment={
-              <InputAdornment position="end">
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle password visibility"
                   onClick={handleClickShowPassword}
@@ -70,11 +69,14 @@ function LoginPage() {
                   {values.showPassword ? <Visibility /> : <VisibilityOff />}
                 </IconButton>
               </InputAdornment>
-            }
+              )}}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
             labelWidth={70}
             required
           />
-        </FormControl>
       </ContainerInputs>
       <StyledButton onClick={goToProfileAdressPage}>Entrar</StyledButton>
       <SignUpTitle>Não possui cadastro? Clique <SignUpButton onClick={goToSignUpPage}>aqui.</SignUpButton></SignUpTitle>

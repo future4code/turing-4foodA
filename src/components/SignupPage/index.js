@@ -74,16 +74,15 @@ function SinupPage() {
         />
       </ContainerInputs>
       <ContainerInputs>
-        <FormControl variant="outlined">
-          <InputLabel required >Senha</InputLabel>
-          <StyledOutlinedInput
+          <StyledTextField
             type={values.showPassword ? 'text' : 'password'}
             value={values.password}
             onChange={handleChange('password')}
             label="Senha"
             placeholder="Mínimo 6 caracteres"
-            endAdornment={
-              <InputAdornment position="end">
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle password visibility"
                   onClick={handleClickShowPassword}
@@ -93,23 +92,25 @@ function SinupPage() {
                   {values.showPassword ? <Visibility /> : <VisibilityOff />}
                 </IconButton>
               </InputAdornment>
-            }
+              )}}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
             labelWidth={70}
             required
           />
-        </FormControl>
       </ContainerInputs>
       <ContainerInputs>
-        <FormControl variant="outlined" >
-          <InputLabel required >Confirmar</InputLabel>
-          <StyledOutlinedInput
+          <StyledTextField
             type={values.showPassword ? 'text' : 'password'}
             value={values.password}
             onChange={handleChange('password')}
-            label="Senha"
+            label="Confirmar"
             placeholder="Confirme a senha anterior"
-            endAdornment={
-              <InputAdornment position="end">
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle password visibility"
                   onClick={handleClickShowPassword}
@@ -119,11 +120,14 @@ function SinupPage() {
                   {values.showPassword ? <Visibility /> : <VisibilityOff />}
                 </IconButton>
               </InputAdornment>
-            }
+              )}}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
             labelWidth={70}
             required
           />
-        </FormControl>
       </ContainerInputs>
       <StyledButton>Criar</StyledButton>
     </ContainerLogin>
