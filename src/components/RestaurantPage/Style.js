@@ -1,19 +1,26 @@
 import styled from 'styled-components'
 
-export const HomeContainer = styled.div`
+export const RestContainer = styled.div`
     display: flex;
     flex-direction: column;
 `
+
 export const Header = styled.div `
     border-bottom: 1px solid grey;
     height: 2,75rem;
     text-align: center;
 `
+
+export const MainContainer = styled.div `
+    margin: 1rem;
+`
+
 export const Form = styled.form `
     display: flex;
     flex-direction: row;
     border: 1px solid grey;
 `
+
 export const Button = styled.button `
     margin: 1rem;
     border: none;
@@ -71,7 +78,6 @@ export const ProductTitle = styled.p `
     font-family: Roboto;
     font-size: 1rem;
     letter-spacing: -0.39px;
-
 `
 
 export const ProductDescription = styled.div `
@@ -87,7 +93,4 @@ export const ProductDescription = styled.div `
     letter-spacing: -0.39px;
 `
 
-export const RestContainer = styled.div `
-    margin: 1rem;
 
-`
