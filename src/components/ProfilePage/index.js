@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+import edit from './../../Images/edit.svg';
+
 const ContainerProfile = styled.div `
     background-color: #fff;
     font-family: 'Roboto';
@@ -31,6 +33,10 @@ const ContainerAddress = styled.div `
 
 const IconEdit = styled.div `
     align-self: flex-start;
+`;
+
+const IconEditAddress = styled.div `
+    align-self: center;
 `;
 
 const AddressData = styled.div `
@@ -157,7 +163,7 @@ function ProfilePage() {
                 <UserInfo>{profile.cpf}</UserInfo>
             </UserData>
             <IconEdit>
-                <p>Edit</p>
+                <p><img src={edit} /></p>
             </IconEdit>
         </ContainerUser>
         <ContainerAddress>
@@ -165,9 +171,9 @@ function ProfilePage() {
                 <AddressTitle>Endereço cadastrado</AddressTitle>
                 <Address>{profile.address}</Address>
             </AddressData>
-            <IconEdit>
-                <p>Edit</p>
-            </IconEdit>
+            <IconEditAddress>
+                <p><img src={edit} /></p>
+            </IconEditAddress>
         </ContainerAddress>
         <DateOrder>
             <TitleHistoryOrder>Histórico de pedidos</TitleHistoryOrder>
