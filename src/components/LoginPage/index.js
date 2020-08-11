@@ -5,8 +5,6 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
 import { useHistory } from "react-router-dom";
 
 function LoginPage() {
@@ -74,7 +72,6 @@ function LoginPage() {
                 shrink: true,
               }}
               variant="outlined"
-            labelWidth={70}
             required
           />
       </ContainerInputs>

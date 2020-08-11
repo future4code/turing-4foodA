@@ -1,12 +1,10 @@
 import React, {useState} from 'react';
-import { ContainerLogin, LogoImg, ContainerTitulo, TituloLogin, ContainerInputs, StyledTextField, StyledOutlinedInput, StyledButton, ReturnButton, ButtonContainer} from './styles'
+import { ContainerLogin, LogoImg, ContainerTitulo, TituloLogin, ContainerInputs, StyledTextField, StyledButton, ReturnButton, ButtonContainer} from './styles'
 import Logo from '../../Images/logo-future-eats-invert.svg'
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { useHistory } from "react-router-dom";
 
@@ -97,7 +95,6 @@ function SinupPage() {
                 shrink: true,
               }}
               variant="outlined"
-            labelWidth={70}
             required
           />
       </ContainerInputs>
@@ -125,7 +122,6 @@ function SinupPage() {
                 shrink: true,
               }}
               variant="outlined"
-            labelWidth={70}
             required
           />
       </ContainerInputs>

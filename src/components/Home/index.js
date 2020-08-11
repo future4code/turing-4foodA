@@ -21,7 +21,7 @@ function Home() {
   const history = useHistory();
   useEffect(() => {
     setTimeout(() => history.push("/login"), 2000)
-  }, [])
+  }, [history])
   return (
     <ContainerHome className="App">
       <LogoImg src={logo}/>
