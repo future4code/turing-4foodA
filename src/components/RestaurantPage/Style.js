@@ -59,10 +59,12 @@ export const ProductContainer = styled.div `
     border: 1px solid grey;
     border-radius: 8px;
     margin-top: 0.5rem;
-    padding-bottom: 1rem;
 `
 
-export const Image = styled.img `
+export const Image = styled.div `
+    background-image: url(${props => props.BackgroundImage});
+    background-size: cover;
+    background-position: center;
     width: 100%;
     height: 7.5rem;
     border-top-left-radius: 8px;
@@ -87,7 +89,6 @@ export const ProductDescription = styled.div `
     justify-content: space-between;
     margin-left: 1rem;
     margin-right: 1rem;
-    margin-bottom: 1rem;
     font-family: Roboto;
     font-size: 1rem;
     letter-spacing: -0.39px;

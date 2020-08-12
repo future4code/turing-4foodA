@@ -36,7 +36,7 @@ function Router() {
                 <Route exact path = "/search-restaurant">
                     <SearchPage/>
                 </Route>
-                <Route exact path = "/restaurant/details">
+                <Route exact path = "/restaurant/details/:restaurantId">
                     <RestaurantDetailPage/>
                     </Route>
                 <Route exact path = "/restaurant/details/quantity">

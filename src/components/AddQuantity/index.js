@@ -1,7 +1,10 @@
 import React from 'react';
-import {MainContainer, CardContainer, Select} from './Style';
+import {MainContainer, CardContainer, Select, ButtonAddToCart} from './Style';
 
-function AddQuantity() {
+function AddQuantity(props) {
+  const addToCart = () => {
+    props.setShowQuantity(!props.showQuantity);
+  }
     return (
       <MainContainer>
           <CardContainer>
@@ -16,7 +19,7 @@ function AddQuantity() {
                 <option>6</option>
                 <option>7</option>
               </Select>
-              <p>ADICIONAR NO CARRINHO</p>
+              <ButtonAddToCart onClick={addToCart}><p>ADICIONAR NO CARRINHO</p></ButtonAddToCart>
           </CardContainer>
       </MainContainer>
     );
