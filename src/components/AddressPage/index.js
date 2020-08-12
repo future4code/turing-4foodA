@@ -6,6 +6,7 @@ import axios from 'axios'
 import {useHistory} from 'react-router-dom'
 import useForm from '../useForm'
 
+
 const DivSignup = styled.div`
     width: 22.5rem;
     height: 40rem;
