@@ -42,6 +42,66 @@ function RestaurantDetailPage() {
     // history.push("/restaurant/details/quantity")
     setShowQuantity(!showQuantity)
   }
+
+  const salgadoCategory = restaurant.products && restaurant.products.filter( product => {
+    if(product.category === "Salgado") {
+      return true
+    };
+})
+
+  const pastelCategory = restaurant.products && restaurant.products.filter( product => {
+    if(product.category === "Pastel") {
+      return true
+    }
+})
+  const lancheCategory = restaurant.products && restaurant.products.filter( product => {
+    if(product.category === "Lanche") {
+      return true
+    }
+})
+
+  const acompanhamentoCategory = restaurant.products && restaurant.products.filter( product => {
+    if(product.category === "Acompanhamento") {
+      return true
+    }
+})
+
+  const pizzaCategory = restaurant.products && restaurant.products.filter( product => {
+    if(product.category === "Pizza") {
+      return true
+    }
+})
+
+  const bebidaCategory = restaurant.products && restaurant.products.filter( product => {
+    if(product.category === "Bebida") {
+      return true
+    }
+})
+
+const sorveteCategory = restaurant.products && restaurant.products.filter( product => {
+  if(product.category === "Sorvete") {
+    return true
+  }
+})
+
+const refeicaoCategory = restaurant.products && restaurant.products.filter( product => {
+  if(product.category === "Refeição") {
+    return true
+  }
+})
+
+const outrosCategory = restaurant.products && restaurant.products.filter( product => {
+  if(product.category === "Outros") {
+    return true
+  }
+})
+
+const doceCategory = restaurant.products && restaurant.products.filter( product => {
+  if(product.category === "Doce") {
+    return true
+  }
+})
+
   
   return (
     <Container>
@@ -62,11 +122,28 @@ function RestaurantDetailPage() {
           <Description>{restaurant.address}</Description>            
         </div>
         <SectionContainer>
-          {restaurant.products && restaurant.products.map((product) => {
-                if(product.category === "Salgado") {
-                  return <SectionTitle>Salgado</SectionTitle>
-                }
-          })}
+        {refeicaoCategory && refeicaoCategory.length !== 0 ? <SectionTitle>Refeição</SectionTitle> : <></>}
+            {restaurant.products && restaurant.products.map((product) => {
+                if(product.category === "Refeição") {
+                  return (
+                    <>
+                    <ProductContainer>
+                        <div>
+                          {product.photoUrl && <ImageProduct BackgroundImage={product.photoUrl} />}
+                        </div>
+                        <DescriptionContainer>
+                            <ProductTitle>{product.name}</ProductTitle>
+                            <Ingredients>{product.description}</Ingredients>
+                                <Bottom>
+                                  <Price>R${product.price.toFixed(2)}</Price>
+                                  <ButtonAdd onClick={goToAddQuantity}>adicionar</ButtonAdd>
+                                </Bottom>
+                        </DescriptionContainer>
+                    </ProductContainer>
+                  </>
+                  )}
+            })}
+          {salgadoCategory && salgadoCategory.length !== 0 ? <SectionTitle>Salgado</SectionTitle> : <></>}
             {restaurant.products && restaurant.products.map((product) => {
                 if(product.category === "Salgado") {
                   return (
@@ -88,7 +165,7 @@ function RestaurantDetailPage() {
                   )}
             })}
 
-            <SectionTitle>Pastel</SectionTitle>
+            {pastelCategory && pastelCategory.length !== 0 ? <SectionTitle>Pastel</SectionTitle> : <></>}
             {restaurant.products && restaurant.products.map((product) => {
                 if(product.category === "Pastel") {
                   return (
@@ -110,7 +187,7 @@ function RestaurantDetailPage() {
                   )}
             })}
 
-            <SectionTitle>Lanche</SectionTitle>
+            {lancheCategory && lancheCategory.length !== 0 ? <SectionTitle>Lanche</SectionTitle> : <></>}
             {restaurant.products && restaurant.products.map((product) => {
                 if(product.category === "Lanche") {
                   return (
@@ -132,7 +209,7 @@ function RestaurantDetailPage() {
                   )}
             })}
 
-            <SectionTitle>Acompanhamento</SectionTitle>
+            {acompanhamentoCategory && acompanhamentoCategory.length !== 0 ? <SectionTitle>Acompanhamento</SectionTitle> : <></>}
             {restaurant.products && restaurant.products.map((product) => {
                 if(product.category === "Acompanhamento") {
                   return (
@@ -154,7 +231,7 @@ function RestaurantDetailPage() {
                   )}
             })}
 
-            <SectionTitle>Pizza</SectionTitle>
+            {pizzaCategory && pizzaCategory.length !== 0 ? <SectionTitle>Pizza</SectionTitle> : <></>}
             {restaurant.products && restaurant.products.map((product) => {
                 if(product.category === "Pizza") {
                   return (
@@ -176,9 +253,75 @@ function RestaurantDetailPage() {
                   )}
             })}
 
-            <SectionTitle>Bebida</SectionTitle>
+            {bebidaCategory && bebidaCategory.length !== 0 ? <SectionTitle>Bebida</SectionTitle> : <></>}
             {restaurant.products && restaurant.products.map((product) => {
                 if(product.category === "Bebida") {
+                  return (
+                    <>
+                    <ProductContainer>
+                        <div>
+                          {product.photoUrl && <ImageProduct BackgroundImage={product.photoUrl} />}
+                        </div>
+                        <DescriptionContainer>
+                            <ProductTitle>{product.name}</ProductTitle>
+                            <Ingredients>{product.description}</Ingredients>
+                                <Bottom>
+                                  <Price>R${product.price.toFixed(2)}</Price>
+                                  <ButtonAdd onClick={goToAddQuantity}>adicionar</ButtonAdd>
+                                </Bottom>
+                        </DescriptionContainer>
+                    </ProductContainer>
+                  </>
+                  )}
+            })}
+
+            {sorveteCategory && sorveteCategory.length !== 0 ? <SectionTitle>Sorvete</SectionTitle> : <></>}
+            {restaurant.products && restaurant.products.map((product) => {
+                if(product.category === "Sorvete") {
+                  return (
+                    <>
+                    <ProductContainer>
+                        <div>
+                          {product.photoUrl && <ImageProduct BackgroundImage={product.photoUrl} />}
+                        </div>
+                        <DescriptionContainer>
+                            <ProductTitle>{product.name}</ProductTitle>
+                            <Ingredients>{product.description}</Ingredients>
+                                <Bottom>
+                                  <Price>R${product.price.toFixed(2)}</Price>
+                                  <ButtonAdd onClick={goToAddQuantity}>adicionar</ButtonAdd>
+                                </Bottom>
+                        </DescriptionContainer>
+                    </ProductContainer>
+                  </>
+                  )}
+            })}
+
+            {doceCategory && doceCategory.length !== 0 ? <SectionTitle>Doce</SectionTitle> : <></>}
+            {restaurant.products && restaurant.products.map((product) => {
+                if(product.category === "Doce") {
+                  return (
+                    <>
+                    <ProductContainer>
+                        <div>
+                          {product.photoUrl && <ImageProduct BackgroundImage={product.photoUrl} />}
+                        </div>
+                        <DescriptionContainer>
+                            <ProductTitle>{product.name}</ProductTitle>
+                            <Ingredients>{product.description}</Ingredients>
+                                <Bottom>
+                                  <Price>R${product.price.toFixed(2)}</Price>
+                                  <ButtonAdd onClick={goToAddQuantity}>adicionar</ButtonAdd>
+                                </Bottom>
+                        </DescriptionContainer>
+                    </ProductContainer>
+                  </>
+                  )}
+            })}
+
+            {outrosCategory && outrosCategory.length !== 0 ? <SectionTitle>Outros</SectionTitle> : <></>}
+            {restaurant.products && restaurant.products.map((product) => {
+                if(product.category === "Outros") {
                   return (
                     <>
                     <ProductContainer>
