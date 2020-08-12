@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useHistory } from "react-router-dom";
 
 import edit from './../../Images/edit.svg';
+import Footer from './../Footer';
 
 const ContainerProfile = styled.div `
     background-color: #fff;
     font-family: 'Roboto';
     font-size: 1rem;
+    text-align: left;
 `;
 
 const ContainerUser = styled.div `
@@ -17,7 +20,6 @@ const ContainerUser = styled.div `
 `;
 
 const UserData = styled.div `
-
 `;
 
 const UserInfo = styled.p `
@@ -91,6 +93,21 @@ const TitleHistoryOrder = styled.p `
 const Line = styled.hr `
 `;
 
+const ContainerFooter = styled.div `
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+`;
+
+const HeaderContainer = styled.div `
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-size: 1rem;
+    height: 4rem;
+    border-bottom: solid 1px rgba(0, 0, 0, 0.25);
+`;
+
 function ProfilePage() {
     const [profile, setProfile] = useState(
     {
@@ -108,84 +125,95 @@ function ProfilePage() {
         "createdAt": 1597084288573,
         "expiresAt": 1597087888573
     })
+
+    const history = useHistory();
+
+    const goToEditProfile = () => {
+        history.push("/profile-page/edit/user")
+    }
+
+    const goToEditAddress = () => {
+        history.push("/address")
+    }
+
+
+    
     
     const date = new Date(historyOrder.createdAt);
-    const [weekDay, month, day, year, time] = date.toString().split(" ");
+    const [weekDay, month, day, year] = date.toString().split(" ");
 
     
     const monthTranslate = () => {
         switch(month) {
             case 'Jan':
                 return 'Janeiro';
-            break;
             case 'Feb':
                 return 'Fevereiro';
-            break;
             case 'Mar':
                 return 'Março';
-            break;
             case 'Apr':
                 return 'Abril';
-            break;
             case 'May':
                 return 'Maio';
-            break;
             case 'Jun':
                 return 'Junho';
-            break;
             case 'Jul':
                 return 'Julho';
-            break;
             case 'Aug':
                 return 'Agosto';
-            break;
             case 'Sep':
                 return 'Setembro';
-            break;
             case 'Oct':
                 return 'Outubro';
-            break;
             case 'Nov':
                 return 'Novembro';
-            break;
             case 'Dec':
                 return 'Dezembro';
-            break;
+            default:
+                return month;
         }
     }
 
   return (
-    <ContainerProfile>
-        <ContainerUser>
-            <UserData>
-                <UserInfo>{profile.name}</UserInfo>
-                <UserInfo>{profile.email}</UserInfo>
-                <UserInfo>{profile.cpf}</UserInfo>
-            </UserData>
-            <IconEdit>
-                <p><img src={edit} /></p>
-            </IconEdit>
-        </ContainerUser>
-        <ContainerAddress>
-            <AddressData>
-                <AddressTitle>Endereço cadastrado</AddressTitle>
-                <Address>{profile.address}</Address>
-            </AddressData>
-            <IconEditAddress>
-                <p><img src={edit} /></p>
-            </IconEditAddress>
-        </ContainerAddress>
-        <DateOrder>
-            <TitleHistoryOrder>Histórico de pedidos</TitleHistoryOrder>
-            <Line/>
-            <OrderInfo>
-                <TitleOrder>{historyOrder.restaurantName}</TitleOrder>
-                <DateBuy>{`${day} ${monthTranslate()} ${year}`}</DateBuy>
-                <PriceOrder>SUBTOTAL R${historyOrder.totalPrice.toFixed(2)}</PriceOrder>
-            </OrderInfo>
+    <>
+        <HeaderContainer>
+            <p>Meu perfil</p>
+        </HeaderContainer>
+        <ContainerProfile>
+            <ContainerUser>
+                <UserData>
+                    <UserInfo>{profile.name}</UserInfo>
+                    <UserInfo>{profile.email}</UserInfo>
+                    <UserInfo>{profile.cpf}</UserInfo>
+                </UserData>
+                <IconEdit onClick={goToEditProfile}>
+                    <p><img src={edit} /></p>
+                </IconEdit>
+            </ContainerUser>
+            <ContainerAddress>
+                <AddressData>
+                    <AddressTitle>Endereço cadastrado</AddressTitle>
+                    <Address>{profile.address}</Address>
+                </AddressData>
+                <IconEditAddress onClick={goToEditAddress}>
+                    <p><img src={edit} /></p>
+                </IconEditAddress>
+            </ContainerAddress>
+            <DateOrder>
+                <TitleHistoryOrder>Histórico de pedidos</TitleHistoryOrder>
+                <Line/>
+                <OrderInfo>
+                    <TitleOrder>{historyOrder.restaurantName}</TitleOrder>
+                    <DateBuy>{`${day} ${monthTranslate()} ${year}`}</DateBuy>
+                    <PriceOrder>SUBTOTAL R${historyOrder.totalPrice.toFixed(2)}</PriceOrder>
+                </OrderInfo>
 
-        </DateOrder>
-    </ContainerProfile>
+            </DateOrder>
+        </ContainerProfile>
+        <ContainerFooter>
+         <Footer />
+        </ContainerFooter>
+    </>
   );
 }
 
