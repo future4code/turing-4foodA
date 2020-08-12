@@ -7,16 +7,33 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { useHistory } from "react-router-dom";
+import useForm from '../../Hooks/useForm'
+import Axios from 'axios';
 
 function SinupPage() {
   const history = useHistory();
-  const [values, setValues] = useState({showPassword: false})
+  const {form, onChange} = useForm({name:"", email: "", cpf:""})
+  const [password, setPassword] = useState({password: "", showPassword: false})
+  const [confirmPassword, setConfirmPassword] = useState({confirmPassword: "", showConfirmPassword: false})
+  const handleInputChange = event => {
+    const {name, value} = event.target
+    onChange(name, value)
+}
+
   const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+    setPassword({ ...password, [prop]: event.target.value });
+  };
+
+  const handleChangeConfirmPassword = (prop) => (event) => {
+    setConfirmPassword({ ...confirmPassword, [prop]: event.target.value });
   };
 
   const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
+    setPassword({ ...password, showPassword: !password.showPassword });
+  };
+
+  const handleClickShowConfirmPassword = () => {
+    setConfirmPassword({ ...confirmPassword, showConfirmPassword: !confirmPassword.showConfirmPassword });
   };
 
   const handleMouseDownPassword = (event) => {
@@ -26,6 +43,29 @@ function SinupPage() {
   const goToLoginPage = () => {
     history.push("/login")
   }
+
+  const handleSignUp = (e) => {
+    e.preventDefault()
+    if(password.password !== confirmPassword.confirmPassword) {
+      alert("As senhas precisam ser iguais")
+    } else {    
+    const body = {
+      name: form.name,
+      email: form.email,
+      cpf: form.cpf,
+      password: password.password
+    }
+    Axios.post("https://us-central1-missao-newton.cloudfunctions.net/fourFoodA/signup", body)
+    .then((response) => {
+      window.localStorage.setItem("token", response.data.token)
+      alert("usuário criado com sucesso!")
+      history.push("/restaurants")
+    })
+    .catch(() => {
+      alert("Não foi possível criar o usuário, verifique se todas as informações estão corretas.")
+    })}
+  }
+
   return (
     <ContainerLogin>
       <ButtonContainer>
@@ -35,10 +75,15 @@ function SinupPage() {
       <ContainerTitulo>
         <TituloLogin>Cadastrar</TituloLogin>
       </ContainerTitulo>
+      <form onSubmit={handleSignUp}>
       <ContainerInputs>
         <StyledTextField 
+          name="name"
+          value={form.name}
+          onChange={handleInputChange}
           label="Nome"
           placeholder="Nome e sobrenome"
+          inputProps={{pattern: "^.{3,}", title:"Seu nome precisa ter no mínimo 3 caracteres"}}
           margin="normal"
           InputLabelProps={{
             shrink: true,
@@ -49,7 +94,11 @@ function SinupPage() {
       </ContainerInputs>
       <ContainerInputs>
         <StyledTextField 
+          name="email"
+          value={form.email}
+          onChange={handleInputChange}
           label="E-mail"
+          type="email"
           placeholder="email@email.com"
           margin="normal"
           InputLabelProps={{
@@ -61,8 +110,13 @@ function SinupPage() {
       </ContainerInputs>
       <ContainerInputs>
         <StyledTextField 
+          name="cpf"
+          value={form.cpf}
+          onChange={handleInputChange}
+          type="number"
           label="CPF"
           placeholder="000.000.000-00"
+          inputProps={{pattern: "/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/", title:"Digite um CPF no formato: xxx.xxx.xxx-xx"}}
           margin="normal"
           InputLabelProps={{
             shrink: true,
@@ -73,11 +127,12 @@ function SinupPage() {
       </ContainerInputs>
       <ContainerInputs>
           <StyledTextField
-            type={values.showPassword ? 'text' : 'password'}
-            value={values.password}
+            type={password.showPassword ? 'text' : 'password'}
+            value={password.password}
             onChange={handleChange('password')}
             label="Senha"
             placeholder="Mínimo 6 caracteres"
+            inputProps={{pattern: "^.{6,}", title:"A senha precisa ter no mínimo 6 caracteres"}}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -87,7 +142,7 @@ function SinupPage() {
                   onMouseDown={handleMouseDownPassword}
                   edge="end"
                 >
-                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                  {password.showPassword ? <Visibility /> : <VisibilityOff />}
                 </IconButton>
               </InputAdornment>
               )}}
@@ -100,21 +155,22 @@ function SinupPage() {
       </ContainerInputs>
       <ContainerInputs>
           <StyledTextField
-            type={values.showPassword ? 'text' : 'password'}
-            value={values.password}
-            onChange={handleChange('password')}
+            type={confirmPassword.showConfirmPassword ? 'text' : 'password'}
             label="Confirmar"
             placeholder="Confirme a senha anterior"
+            value={confirmPassword.confirmPassword}
+            onChange={handleChangeConfirmPassword('confirmPassword')}
+            inputProps={{pattern: "^.{6,}", title:"A senha precisa ter no mínimo 6 caracteres"}}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
+                  onClick={handleClickShowConfirmPassword}
                   onMouseDown={handleMouseDownPassword}
                   edge="end"
                 >
-                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                  {confirmPassword.showConfirmPassword ? <Visibility /> : <VisibilityOff />}
                 </IconButton>
               </InputAdornment>
               )}}
@@ -126,6 +182,7 @@ function SinupPage() {
           />
       </ContainerInputs>
       <StyledButton>Criar</StyledButton>
+      </form>
     </ContainerLogin>
   );
 }
