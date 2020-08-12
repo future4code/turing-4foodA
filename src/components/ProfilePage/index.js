@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from "react-router-dom";
 
 import edit from './../../Images/edit.svg';
 import Footer from './../Footer';
+import axios from 'axios';
 
 const ContainerProfile = styled.div `
     background-color: #fff;
@@ -109,24 +110,19 @@ const HeaderContainer = styled.div `
 `;
 
 function ProfilePage() {
-    const [profile, setProfile] = useState(
-    {
-        id: "jMpvdFHbysmolONQMnF1",
-        name: "Hyago",
-        email: "hyago@gmail.com",
-        cpf: "123.123.123-12",
-        hasAddress: true,
-        address: "R. Afonso Braz, 177, 71 - Vila N. Conceição"
-    })
+    const [profile, setProfile] = useState({})
 
-    const [historyOrder, setHistoryOrder] = useState({
-        "totalPrice": 37,
-        "restaurantName": "Habibs",
-        "createdAt": 1597084288573,
-        "expiresAt": 1597087888573
-    })
+    const [historyOrder, setHistoryOrder] = useState(
+        // "totalPrice": 37,
+        // "restaurantName": "Habibs",
+        // "createdAt": 1597084288573,
+        // "expiresAt": 1597087888573
+        []
+    )
 
     const history = useHistory();
+
+    const baseURL = "https://us-central1-missao-newton.cloudfunctions.net/fourFoodA"
 
     const goToEditProfile = () => {
         history.push("/profile-page/edit/user")
@@ -174,6 +170,34 @@ function ProfilePage() {
         }
     }
 
+    useEffect(() => {
+        getProfile()
+        getHistory()
+    },[])
+
+    const getProfile = () => {
+        const token = window.localStorage.getItem("token")
+        axios.get(`${baseURL}/profile`,{headers: {
+            auth: token
+        }}).then((response)=>{
+            setProfile(response.data.user)
+        }).catch((error) => {
+            alert("Erro ao mostrar usuário")
+        })
+    }
+
+    const getHistory = () => {
+        const token = window.localStorage.getItem("token")
+        axios.get(`${baseURL}/orders/history`,{headers: {
+            auth: token
+        }}).then((response)=>{
+            setHistoryOrder(response.data.orders)
+        }).catch((error) => {
+            alert("Erro ao mostrar histórico")
+        })
+    }
+
+
   return (
     <>
         <HeaderContainer>
@@ -202,12 +226,15 @@ function ProfilePage() {
             <DateOrder>
                 <TitleHistoryOrder>Histórico de pedidos</TitleHistoryOrder>
                 <Line/>
-                <OrderInfo>
-                    <TitleOrder>{historyOrder.restaurantName}</TitleOrder>
-                    <DateBuy>{`${day} ${monthTranslate()} ${year}`}</DateBuy>
-                    <PriceOrder>SUBTOTAL R${historyOrder.totalPrice.toFixed(2)}</PriceOrder>
-                </OrderInfo>
-
+                {historyOrder.map((history) => {
+                    return(
+                        <OrderInfo key = {history.createdAt}>
+                            <TitleOrder>{history.restaurantName}</TitleOrder>
+                            <DateBuy>{`${day} ${monthTranslate()} ${year}`}</DateBuy>
+                            <PriceOrder>SUBTOTAL R${history.totalPrice.toFixed(2)}</PriceOrder>
+                        </OrderInfo>
+                    )
+                })}
             </DateOrder>
         </ContainerProfile>
         <ContainerFooter>
