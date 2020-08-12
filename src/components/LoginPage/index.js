@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import Logo from '../../Images/logo-future-eats@3x.png'
+import Logo from '../../Images/logo-future-eats.png'
 import {ContainerLogin, LogoImg, TituloLogin, ContainerTitulo, StyledTextField, ContainerInputs, StyledButton, SignUpTitle, SignUpButton} from './styles'
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
@@ -29,7 +29,7 @@ function LoginPage() {
   };
 
   useEffect(() => {
-    let token = window.localStorage.getItem("token")
+    const token = window.localStorage.getItem("token")
     if(token !== null){
         history.push("/restaurant")
     }
