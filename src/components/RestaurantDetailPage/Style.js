@@ -18,6 +18,9 @@ export const RestContainer = styled.div `
 `
 
 export const Image = styled.img `
+    background-image: url(${props => props.BackgroundImage});
+    background-size: cover;
+    background-position: center;
     width: 100%;
     height: 7.5rem;
     border-top-left-radius: 8px;
@@ -47,7 +50,8 @@ export const RestaurantDescription = styled.div `
     flex-direction: row;
     color: #b8b8b8;
     justify-content: space-between;
-    font-family: Roboto;
+    width: 60%;
+    font-family: 'Roboto';
     font-size: 1rem;
     letter-spacing: -0.39px;
     margin: 0;
@@ -55,22 +59,26 @@ export const RestaurantDescription = styled.div `
 
 export const SectionTitle = styled.p `
     margin: 1rem 0 0.5rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid black;
 `
 
 export const SectionContainer = styled.div `
-    border-top: 1px solid black;
 `
 
 export const ProductContainer = styled.div `
     display: flex;
     flex-direction: row;
-    border: 1px solid grey;
+    border: 1px solid #b8b8b8;
     height: 7rem;
     border-radius: 8px;
     margin-top: 0.5rem;
 `
 
 export const ImageProduct = styled.img `
+    background-image: url(${props => props.BackgroundImage});
+    background-size: cover;
+    background-position: center;
     height: 7rem;
     width: 6rem;
     border-top-left-radius: 8px;

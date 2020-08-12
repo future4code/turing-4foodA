@@ -1,5 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+
 import {RestContainer, Header, Form, Button, Image, Input, ScrollBar, ItemScrollBar, ProductContainer, ProductTitle, 
   ProductDescription, MainContainer} from './Style';
 import SearchIcon from '@material-ui/icons/Search';
@@ -7,16 +9,29 @@ import SearchIcon from '@material-ui/icons/Search';
 
 function RestaurantPage() {
   const history = useHistory();
-  const [restaurant, setRestaurant] = useState({
-    "id": "10",
-    "description": "Restaurante sofisticado busca o equilíbrio entre ingredientes que realçam a experiência da culinária japonesa.",
-    "deliveryTime": 50,
-    "shipping": 13,
-    "address": "Travessa Reginaldo Pereira, 130 - Ibitinga",
-    "name": "Tadashii",
-    "logoUrl": "http://soter.ninja/futureFoods/logos/tadashii.png",
-    "category": "Asiática"
-})
+  const [restaurants, setRestaurants] = useState([])
+
+  const token = window.localStorage.getItem('token');
+
+  useEffect(() => {
+    getRestaurants()
+  }, [])
+
+  const getRestaurants = async () => {
+      try {
+        const response = await axios.get("https://us-central1-missao-newton.cloudfunctions.net/fourFoodA/restaurants", {
+          headers: {
+            auth: token
+          }
+        })
+        setRestaurants(response.data.restaurants)
+      } catch(error) {
+        history.push("/address")
+        console.log(error.response)
+      }
+  };
+
+  console.log(restaurants)
 
   const goToSearchPage = () => {
     history.push("/search-restaurant")
@@ -43,38 +58,18 @@ function RestaurantPage() {
           <ItemScrollBar>Petiscos</ItemScrollBar>
           <ItemScrollBar>Mexicana</ItemScrollBar>
         </ScrollBar>
-        <ProductContainer>
-          <Image src={restaurant.logoUrl}></Image>
-          <ProductTitle>{restaurant.name}</ProductTitle>
-          <ProductDescription>
-            <p>{restaurant.deliveryTime} min</p>
-            <p>R${restaurant.shipping.toFixed(2)}</p>
-          </ProductDescription>
-        </ProductContainer>
-        <ProductContainer>
-          <Image src={'https://media-manager.noticiasaominuto.com/1920/naom_5ad728daf049e.jpg'}></Image>
-          <ProductTitle>Burguer Eldorado</ProductTitle>
-          <ProductDescription>
-            <p>{restaurant.time} min</p>
-            <p>Frete R$6,00</p>
-          </ProductDescription>
-        </ProductContainer>
-        <ProductContainer>
-          <Image src={'https://media-manager.noticiasaominuto.com/1920/naom_5ad728daf049e.jpg'}></Image>
-          <ProductTitle>Burguer Eldorado</ProductTitle>
-          <ProductDescription>
-            <p>{restaurant.time} min</p>
-            <p>Frete R$6,00</p>
-          </ProductDescription>
-        </ProductContainer>
-        <ProductContainer>
-          <Image src={'https://media-manager.noticiasaominuto.com/1920/naom_5ad728daf049e.jpg'}></Image>
-          <ProductTitle>Burguer Eldorado</ProductTitle>
-          <ProductDescription>
-            <p>30 - 45 min</p>
-            <p>Frete R$6,00</p>
-          </ProductDescription>
-        </ProductContainer>
+        {restaurants !== 0 && restaurants.map((restaurant) => {
+          return (
+                <ProductContainer key={restaurant.id}>
+                  <Image BackgroundImage={restaurant.logoUrl} />
+                  <ProductTitle>{restaurant.name}</ProductTitle>
+                  <ProductDescription>
+                    <p>{restaurant.deliveryTime} min</p>
+                    <p>R${restaurant.shipping.toFixed(2)}</p>
+                  </ProductDescription>
+                </ProductContainer>
+          );
+        })}
       </MainContainer>
     </RestContainer>
   );
