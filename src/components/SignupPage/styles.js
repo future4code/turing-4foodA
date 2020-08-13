@@ -76,3 +76,14 @@ export const ButtonContainer = styled.div`
     display: flex;
     justify-content: flex-start;
 `
+
+export const Message = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    color: #e8222e;
+    font-family: Roboto;
+    font-size: 0.75rem;
+    margin: 0 auto;
+    width: 20.5rem;
+    height: 1.125rem;
+`
