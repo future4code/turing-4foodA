@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import { ContainerLogin, LogoImg, ContainerTitulo, TituloLogin, ContainerInputs, StyledTextField, StyledButton, ReturnButton, ButtonContainer} from './styles'
-import Logo from '../../Images/logo-future-eats@3x.png'
+import { ContainerLogin, LogoImg, ContainerTitulo, TituloLogin, ContainerInputs, StyledTextField, StyledButton, ReturnButton, ButtonContainer, Message} from './styles'
+import Logo from '../../Images/logo-future-eats.png'
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
@@ -15,6 +15,7 @@ function SinupPage() {
   const {form, onChange} = useForm({name:"", email: "", cpf:""})
   const [password, setPassword] = useState({password: "", showPassword: false})
   const [confirmPassword, setConfirmPassword] = useState({confirmPassword: "", showConfirmPassword: false})
+  const [message, setMessage] = useState(false)
   const handleInputChange = event => {
     const {name, value} = event.target
     onChange(name, value)
@@ -47,7 +48,7 @@ function SinupPage() {
   const handleSignUp = (e) => {
     e.preventDefault()
     if(password.password !== confirmPassword.confirmPassword) {
-      alert("As senhas precisam ser iguais")
+      setMessage(true)
     } else {    
     const body = {
       name: form.name,
@@ -59,11 +60,21 @@ function SinupPage() {
     .then((response) => {
       window.localStorage.setItem("token", response.data.token)
       alert("usuário criado com sucesso!")
-      history.push("/restaurants")
+      history.push("/restaurant")
     })
     .catch(() => {
       alert("Não foi possível criar o usuário, verifique se todas as informações estão corretas.")
     })}
+  }
+  
+  const renderMessage = () => {
+    if(message === true) {
+      return (
+        <Message>As senhas não correspondem.</Message>
+      )
+    } else {
+      return(<div></div>)
+    }
   }
 
   return (
@@ -113,10 +124,9 @@ function SinupPage() {
           name="cpf"
           value={form.cpf}
           onChange={handleInputChange}
-          type="number"
           label="CPF"
           placeholder="000.000.000-00"
-          inputProps={{pattern: "/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/", title:"Digite um CPF no formato: xxx.xxx.xxx-xx"}}
+          inputProps={{pattern:"\\d{3}\\.\\d{3}\\.\\d{3}[-]\\d{2}", title:"Digite um CPF no formato: XXX.XXX.XXX-XX"}}
           margin="normal"
           InputLabelProps={{
             shrink: true,
@@ -181,6 +191,7 @@ function SinupPage() {
             required
           />
       </ContainerInputs>
+      {renderMessage()}
       <StyledButton>Criar</StyledButton>
       </form>
     </ContainerLogin>
