@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 import {RestContainer, Header, Form, Button, Image, Input, ScrollBar, ItemScrollBar, ProductContainer, ProductTitle, 
-  ProductDescription, MainContainer} from './Style';
+ProductDescription, MainContainer} from './Style';
 import SearchIcon from '@material-ui/icons/Search';
 
 
@@ -35,7 +35,11 @@ function RestaurantPage() {
 
   const goToSearchPage = () => {
     history.push("/search-restaurant")
-}
+  }
+
+  const sendDetailPage = (restaurantId) => {
+    history.push(`/restaurant/details/${restaurantId}`)
+  }
 
   return (
     <RestContainer>
@@ -60,7 +64,7 @@ function RestaurantPage() {
         </ScrollBar>
         {restaurants !== 0 && restaurants.map((restaurant) => {
           return (
-                <ProductContainer key={restaurant.id}>
+                <ProductContainer onClick={() => sendDetailPage(restaurant.id)} key={restaurant.id}>
                   <Image BackgroundImage={restaurant.logoUrl} />
                   <ProductTitle>{restaurant.name}</ProductTitle>
                   <ProductDescription>
