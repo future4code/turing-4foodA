@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from "react-router-dom";
+import axios from 'axios'
 
 import {TextField} from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
@@ -54,21 +55,59 @@ const SendNewDatas = styled.button `
 `;
 
 function ProfileEditPage() {
-  const [profile, setProfile] = useState(
-    {
-        id: "jMpvdFHbysmolONQMnF1",
-        name: "Hyago",
-        email: "hyago@gmail.com",
-        cpf: "123.123.123-12",
-        hasAddress: true,
-        address: "R. Afonso Braz, 177, 71 - Vila N. Conceição"
-    })
+  const [profile, setProfile] = useState({})
 
     const history = useHistory();
+
+    const baseURL ="https://us-central1-missao-newton.cloudfunctions.net/fourFoodA"
 
     const goToEditProfilePage = () => {
       history.push("/profile-page")
   }
+
+  useEffect(() => {
+    const token = window.localStorage.getItem("token")
+
+    if(token === null){
+        history.push("/login")
+    }else{
+      getProfile()
+    }
+},[history])
+
+  const getProfile = () => {
+    const token = window.localStorage.getItem("token")
+    axios.get(`${baseURL}/profile`,{headers: {
+        auth: token
+    }}).then((response)=>{
+        setProfile(response.data.user)
+    }).catch((error) => {
+        alert("Erro ao mostrar usuário")
+    })
+}
+
+const onChange = (event) => {
+  setProfile(event.target.value)
+}
+
+const updateProfile = (event) => {
+  event.preventDefault();
+  const token = window.localStorage.getItem("token")
+  const body = {
+    name: profile.name,
+    email: profile.email,
+    cpf: profile.cpf
+  }
+  axios.put(`${baseURL}/profile`,{headers: {
+      auth: token
+  }}).then((response)=>{
+    window.localStorage.setItem('token', response.data.token)
+    alert("Perfil atualizado com sucesso!")
+    history.push(`/profile-page`);
+  }).catch((error) => {
+      alert("Erro ao atualizar perfil")
+  })
+}
 
   return (
     <>
@@ -78,7 +117,7 @@ function ProfileEditPage() {
             <TextEditTitle>Editar</TextEditTitle>
           </InfoHeaders>
       </HeaderContainer>
-      <ContainerProfile>
+      <ContainerProfile onSubmit={updateProfile}>
         <ContainerInput>
           <StyledTextField 
             label="Nome"
@@ -90,6 +129,7 @@ function ProfileEditPage() {
             }}
             variant="outlined"
             required
+            onChange={onChange}
           />
         </ContainerInput>
         <ContainerInput>
@@ -103,6 +143,7 @@ function ProfileEditPage() {
             }}
             variant="outlined"
             required
+            onChange={onChange}
           />
         </ContainerInput>
         <ContainerInput>
@@ -116,9 +157,10 @@ function ProfileEditPage() {
               }}
               variant="outlined"
               required
+              onChange={onChange}
             />
         </ContainerInput>
-        <SendNewDatas>Enviar</SendNewDatas>
+        <SendNewDatas type="submit">Enviar</SendNewDatas>
       </ContainerProfile>
     </>
   );
