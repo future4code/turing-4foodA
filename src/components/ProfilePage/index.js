@@ -112,13 +112,7 @@ const HeaderContainer = styled.div `
 function ProfilePage() {
     const [profile, setProfile] = useState({})
 
-    const [historyOrder, setHistoryOrder] = useState(
-        // "totalPrice": 37,
-        // "restaurantName": "Habibs",
-        // "createdAt": 1597084288573,
-        // "expiresAt": 1597087888573
-        []
-    )
+    const [historyOrder, setHistoryOrder] = useState([])
 
     const history = useHistory();
 
@@ -129,16 +123,12 @@ function ProfilePage() {
     }
 
     const goToEditAddress = () => {
-        history.push("/address")
+        history.push("/profile-page/edit/address")
     }
-
-
-    
-    
+ 
     const date = new Date(historyOrder.createdAt);
     const [weekDay, month, day, year] = date.toString().split(" ");
 
-    
     const monthTranslate = () => {
         switch(month) {
             case 'Jan':
@@ -171,9 +161,15 @@ function ProfilePage() {
     }
 
     useEffect(() => {
-        getProfile()
-        getHistory()
-    },[])
+        const token = window.localStorage.getItem("token")
+  
+        if(token === null){
+            history.push("/login")
+        }else{
+            getProfile()
+            getHistory()
+        }
+    },[history])
 
     const getProfile = () => {
         const token = window.localStorage.getItem("token")
@@ -196,7 +192,6 @@ function ProfilePage() {
             alert("Erro ao mostrar histórico")
         })
     }
-
 
   return (
     <>
@@ -226,7 +221,7 @@ function ProfilePage() {
             <DateOrder>
                 <TitleHistoryOrder>Histórico de pedidos</TitleHistoryOrder>
                 <Line/>
-                {historyOrder.map((history) => {
+                {historyOrder === ([])? historyOrder.map((history) => {
                     return(
                         <OrderInfo key = {history.createdAt}>
                             <TitleOrder>{history.restaurantName}</TitleOrder>
@@ -234,7 +229,7 @@ function ProfilePage() {
                             <PriceOrder>SUBTOTAL R${history.totalPrice.toFixed(2)}</PriceOrder>
                         </OrderInfo>
                     )
-                })}
+                }):<p>Você não realizou nenhum pedido</p>}
             </DateOrder>
         </ContainerProfile>
         <ContainerFooter>

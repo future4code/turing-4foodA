@@ -87,7 +87,7 @@ function AddressPage (){
             complement: form.complement
         }
         axios.put(`${baseURL}`,body,{headers: {auth:token}}).then((response) => {
-            window.localStorage.setItem('novoToken', response.data.token)
+            window.localStorage.getItem('novoToken', response.data.token)
             alert("Endereço criado com sucesso!")
             history.push(`/restaurant`);
         }).catch(()=> {
