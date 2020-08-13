@@ -126,25 +126,21 @@ function AddressPage (){
             <DivTitle>
                 <TitleSignup>Meu endereço</TitleSignup>
             </DivTitle>
-                <FormSignup  noValidate autoComplete="off" onSubmit={putAddress}>
+                <FormSignup onSubmit={putAddress}>
                     <TextFieldSignup
-                        required
-                        id="outlined-required"
                         name="street"
                         value={form.street}
                         label="Logradouro"
                         placeholder="Rua / Av."
+                        inputProps={{pattern: "^.{5,}", title:"Rua precisa ter no mínimo 5 caracteres"}}
                         InputLabelProps={{
-                            shrink: true,
-                            parttern: "^.{5,}",
-                            title:"Rua precisa ter no mínimo 5 caracteres"
+                            shrink: true    
                         }}
                         variant="outlined"
                         onChange={handleInputChange}
+                        required
                     />
                     <TextFieldSignup
-                        required
-                        id="outlined-required"
                         type="number"
                         name="number"
                         value={form.number}
@@ -155,50 +151,45 @@ function AddressPage (){
                         }}
                         variant="outlined"
                         onChange={handleInputChange}
+                        required
                     />
                     <TextFieldSignup
-                        id="outlined-required"
                         name="complement"
                         value={form.complement}
                         label="Complemento"
                         placeholder="Apto. / Bloco"
+                        inputProps={{pattern: "^.{3,}", title:"Complemento precisa ter no mínimo 3 caracteres"}}
                         InputLabelProps={{
                             shrink: true,
-                            parttern: "^.{3,}",
-                            title:"Complemento precisa ter no mínimo 3 caracteres"
                         }}
                         variant="outlined"
                         onChange={handleInputChange}
                     />
                     <TextFieldSignup
-                        required
-                        id="outlined-required"
                         name="neighbourhood"
                         value={form.neighbourhood}
                         label="Bairro"
                         placeholder="Bairro"
+                        inputProps={{pattern: "^.{3,}", title:"Bairro precisa ter no mínimo 3 caracteres"}}
                         InputLabelProps={{
                             shrink: true,
-                            parttern: "^.{3,}",
-                            title:"Bairro precisa ter no mínimo 3 caracteres"
                         }}
                         variant="outlined"
                         onChange={handleInputChange}
+                        required
                     />
                     <TextFieldSignup
-                        required
-                        id="outlined-required"
                         name="city"
                         value={form.city}
                         label="Cidade"
                         placeholder="Cidade"
+                        inputProps={{pattern: "^.{3,}", title:"Cidade precisa ter no mínimo 3 caracteres"}}
                         InputLabelProps={{
                             shrink: true,
-                            parttern: "^.{3,}",
-                            title:"Cidade precisa ter no mínimo 3 caracteres"
                         }}
                         variant="outlined"
                         onChange={handleInputChange}
+                        required
                     />
                     <TextFieldSignup
                         required
@@ -207,6 +198,7 @@ function AddressPage (){
                         value={form.state}
                         label="Estado"
                         placeholder="Estado"
+                        inputProps={{pattern: "^.{2,2}", title:"Insira o estado no formato SP, PR, SC, etc."}}
                         InputLabelProps={{
                             shrink: true,
                         }}
