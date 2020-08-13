@@ -124,7 +124,7 @@ export const Price = styled.p `
 `
 
 export const ButtonAdd = styled.button `
-    margin-top: 0.7rem;
+    margin-top: 0.75rem;
     width: 5.625rem;
     height: 1.938rem;
     border-radius: 8px 0 8px 0;
@@ -134,4 +134,27 @@ export const ButtonAdd = styled.button `
 
 export const Container = styled.div `
     z-index: 1;
+`
+
+export const Top = styled.div `
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 14.3rem;
+`
+
+export const ContainerContador = styled.div `
+    width: 2.063rem;
+    height: 1.5rem;
+    border-radius: 0 8px 0 8px ;
+    background-color: white;
+    border: solid 1px #e8222e;
+    margin-left: 0.3rem;
+    color: #e8222e;
+    text-align: center;
+`
+
+export const Contador = styled.p `
+    margin: 0;
+    padding: 0;
 `
