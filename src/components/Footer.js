@@ -3,6 +3,7 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import HomeIcon from '@material-ui/icons/Home';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import styled from 'styled-components'
+import { useHistory } from "react-router-dom";
 
 const FooterContainer = styled.div`
     height: 3.062rem;
@@ -16,6 +17,9 @@ const FooterContainer = styled.div`
 
 const HomeIconFooter = styled(HomeIcon)`
     color: #BDBDBD;
+    :hover{
+        color:red;
+    }
 `
 
 const ShoppingCartOutlinedIconFooter = styled(ShoppingCartOutlinedIcon)`
@@ -27,11 +31,25 @@ const PersonOutlineIconFooter = styled(PersonOutlineIcon)`
 `
 
 function Footer(props){
+    const history = useHistory();
+
+    const goToRestaurantPage = () => {
+        history.push("/restaurant")
+    }
+
+    const goToCarPage = () => {
+        history.push("/car")
+    }
+
+    const goToProfilePage = () => {
+        history.push("/profile-page")
+    }
+
     return(
         <FooterContainer>
-            <HomeIconFooter fontSize="large" cursor="pointer" color={props.color}/>
-            <ShoppingCartOutlinedIconFooter color="disabled" fontSize="large" cursor="pointer"/>
-            <PersonOutlineIconFooter color="disabled" fontSize="large" cursor="pointer"/>
+            <HomeIconFooter fontSize="large" cursor="pointer" color={props.color} onClick={goToRestaurantPage}/>
+            <ShoppingCartOutlinedIconFooter color="disabled" fontSize="large" cursor="pointer" onClick={goToCarPage}/>
+            <PersonOutlineIconFooter color="disabled" fontSize="large" cursor="pointer" onClick={goToProfilePage}/>
         </FooterContainer>
     )
 }
