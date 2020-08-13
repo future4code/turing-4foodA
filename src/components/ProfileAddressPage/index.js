@@ -74,8 +74,8 @@ function ProfileAddressPage() {
 
     const getFullAddress = () => {
       const token = window.localStorage.getItem('token');
+
       axios.get(`${baseURL}/profile/address`, {headers: {auth:token}}).then((response) => {
-        window.localStorage.setItem('token', response.data.token)
         onChange("street", response.data.address.street)
         onChange("number", response.data.address.number)
         onChange("neighbourhood", response.data.address.neighbourhood)
@@ -125,6 +125,8 @@ function ProfileAddressPage() {
       const Back =() => {
           history.push('/profile-page')
       }
+
+      console.log(form.street)
 
     return(
         <DivSignup>
