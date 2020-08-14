@@ -107,7 +107,7 @@ function ProfileAddressPage() {
             state: form.state,
             complement: form.complement
         }
-        console.log(body)
+    
         axios.put(`${baseURL}/address`,body,{headers: {auth:token}}).then((response) => {
             window.localStorage.setItem('token', response.data.token)
             alert("Endereço criado com sucesso!")
@@ -120,7 +120,7 @@ function ProfileAddressPage() {
       const Back =() => {
           history.push('/profile-page')
       }
-      console.log(form)
+    
     return(
         <DivSignup>
             <DivArrowBack>
@@ -136,14 +136,14 @@ function ProfileAddressPage() {
                         required
                         id="outlined-required"
                         name="street"
+                        data-testid="user-street"
                         value={form.street}
                         label="Logradouro"
                         placeholder="Rua / Av."
                         InputLabelProps={{
                             shrink: true,
-                            parttern: "^.{5,}",
-                            title:"Rua precisa ter no mínimo 5 caracteres"
                         }}
+                        inputProps={{pattern: "^.{5,}", title:"Rua precisa ter no mínimo 5 caracteres"}}
                         variant="outlined"
                         onChange={handleInputChange}
                     />
@@ -152,6 +152,7 @@ function ProfileAddressPage() {
                         id="outlined-required"
                         type="number"
                         name="number"
+                        data-testid="user-number"
                         value={form.number}
                         label="Número"
                         placeholder="Número"
@@ -164,14 +165,14 @@ function ProfileAddressPage() {
                     <TextFieldSignup
                         id="outlined-required"
                         name="complement"
+                        data-testid="user-complement"
                         value={form.complement}
                         label="Complemento"
                         placeholder="Apto. / Bloco"
                         InputLabelProps={{
                             shrink: true,
-                            parttern: "^.{3,}",
-                            title:"Complemento precisa ter no mínimo 3 caracteres"
                         }}
+                        inputProps={{pattern: "^.{3,}", title:"Complemento precisa ter no mínimo 3 caracteres"}}
                         variant="outlined"
                         onChange={handleInputChange}
                     />
@@ -179,14 +180,14 @@ function ProfileAddressPage() {
                         required
                         id="outlined-required"
                         name="neighbourhood"
+                        data-testid="user-neighbourhood"
                         value={form.neighbourhood}
                         label="Bairro"
                         placeholder="Bairro"
                         InputLabelProps={{
                             shrink: true,
-                            parttern: "^.{3,}",
-                            title:"Bairro precisa ter no mínimo 3 caracteres"
                         }}
+                        inputProps={{pattern: "^.{3,}", title:"Bairro precisa ter no mínimo 3 caracteres"}}
                         variant="outlined"
                         onChange={handleInputChange}
                     />
@@ -194,14 +195,14 @@ function ProfileAddressPage() {
                         required
                         id="outlined-required"
                         name="city"
+                        data-testid="user-city"
                         value={form.city}
                         label="Cidade"
                         placeholder="Cidade"
                         InputLabelProps={{
                             shrink: true,
-                            parttern: "^.{3,}",
-                            title:"Cidade precisa ter no mínimo 3 caracteres"
                         }}
+                        inputProps={{pattern: "^.{3,}", title:"Cidade precisa ter no mínimo 3 caracteres"}}
                         variant="outlined"
                         onChange={handleInputChange}
                     />
@@ -209,12 +210,14 @@ function ProfileAddressPage() {
                         required
                         id="outlined-required"
                         name="state"
+                        data-testid="user-state"
                         value={form.state}
                         label="Estado"
                         placeholder="Estado"
                         InputLabelProps={{
                             shrink: true,
                         }}
+                        inputProps={{pattern: "[A-Z]{2,2}", title:"Insira o estado no formato SP, PR, SC, etc."}}
                         variant="outlined"
                         onChange={handleInputChange}
                     />

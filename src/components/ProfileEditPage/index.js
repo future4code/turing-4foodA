@@ -120,13 +120,15 @@ const updateProfile = (event) => {
         <ContainerInput>
           <StyledTextField 
             label="Nome"
-            placeholder={profile.name}
+            data-testid="username-input"
+            placeholder="Nome"
             margin="normal"
             name="name"
             value={profile.name}
             InputLabelProps={{
               shrink: true,
             }}
+            inputProps={{pattern: "^.{3,}", title:"Seu nome precisa ter no mínimo 3 caracteres"}}
             variant="outlined"
             required
             onChange={onChange}
@@ -135,7 +137,8 @@ const updateProfile = (event) => {
         <ContainerInput>
           <StyledTextField 
             label="E-mail"
-            placeholder={profile.email}
+            placeholder="E-mail"
+            data-testid="email-input"
             name="email"
             value={profile.email}
             margin="normal"
@@ -150,13 +153,15 @@ const updateProfile = (event) => {
         <ContainerInput>
           <StyledTextField 
               label="CPF"
-              placeholder={profile.cpf}
+              placeholder="cpf"
+              data-testid="cpf-input"
               margin="normal"
               name="cpf"
               value={profile.cpf}
               InputLabelProps={{
                 shrink: true,
               }}
+              inputProps={{pattern:"\\d{3}\\.\\d{3}\\.\\d{3}[-]\\d{2}", title:"Digite um CPF no formato: XXX.XXX.XXX-XX"}}
               variant="outlined"
               required
               onChange={onChange}

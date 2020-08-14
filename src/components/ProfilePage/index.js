@@ -201,20 +201,20 @@ function ProfilePage() {
         <ContainerProfile>
             <ContainerUser>
                 <UserData>
-                    <UserInfo>{profile.name}</UserInfo>
-                    <UserInfo>{profile.email}</UserInfo>
-                    <UserInfo>{profile.cpf}</UserInfo>
+                    <UserInfo data-testid="user-name">{profile.name}</UserInfo>
+                    <UserInfo data-testid="user-email">{profile.email}</UserInfo>
+                    <UserInfo data-testid="user-cpf">{profile.cpf}</UserInfo>
                 </UserData>
-                <IconEdit onClick={goToEditProfile}>
+                <IconEdit onClick={goToEditProfile} data-testid="edit-user">
                     <p><img src={edit} /></p>
                 </IconEdit>
             </ContainerUser>
             <ContainerAddress>
                 <AddressData>
                     <AddressTitle>Endereço cadastrado</AddressTitle>
-                    <Address>{profile.address}</Address>
+                    <Address data-testid="user-address">{profile.address}</Address>
                 </AddressData>
-                <IconEditAddress onClick={goToEditAddress}>
+                <IconEditAddress onClick={goToEditAddress} data-testid="edit-address">
                     <p><img src={edit} /></p>
                 </IconEditAddress>
             </ContainerAddress>
