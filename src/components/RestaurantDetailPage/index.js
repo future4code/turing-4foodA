@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { useHistory, useParams  } from "react-router-dom";
 import {Image, RestContainer, Header, HeaderTitle, RestaurantTitle, RestaurantDescription, SectionContainer, 
 ProductContainer, ImageProduct, DescriptionContainer, Ingredients, Description, SectionTitle, Bottom,
@@ -6,6 +6,7 @@ Price, ButtonAdd, ProductTitle, Container, Top, ContainerContador, Contador} fro
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import AddQuantity from '../AddQuantity/index';
 import axios from 'axios';
+import CartContext from '../../context/CartContext';
 
 function RestaurantDetailPage() {
   const history = useHistory();
@@ -13,6 +14,12 @@ function RestaurantDetailPage() {
   const [showQuantity, setShowQuantity] = useState(false)
   const [product, setProduct] = useState({})
 
+  const cartContext = useContext(CartContext);
+
+  if(cartContext.carrinho.length >0){
+    console.log(cartContext.carrinho[0].quantity)
+  }
+  
   const pathParams = useParams();
 
   const token = window.localStorage.getItem('token');
@@ -39,10 +46,10 @@ function RestaurantDetailPage() {
     history.push("/restaurant")
 }
 
-  const goToAddQuantity = (product) => {
+  const goToAddQuantity = (allProduct) => {
     // history.push("/restaurant/details/quantity")
     setShowQuantity(!showQuantity)
-    setProduct(product)
+    setProduct(allProduct)
   }
 
   const salgadoCategory = restaurant.products && restaurant.products.filter( product => {
@@ -103,11 +110,17 @@ const doceCategory = restaurant.products && restaurant.products.filter( product 
     return true
   }
 })
-  
+
+const goToCartPage = () => {
+  history.push("/car")
+}
+
   return (
     <Container>
-      {showQuantity && <AddQuantity showQuantity={showQuantity} setShowQuantity={setShowQuantity} selectedProduct={product}/>}
+      {showQuantity && <AddQuantity showQuantity={showQuantity} setShowQuantity={setShowQuantity} selectedProduct={product} restaurant={restaurant}/>}
+      
       <Header>
+      <button onClick={goToCartPage}>carrinho</button>
         <p onClick={goToRestaurantPage}><ArrowBackIosIcon /></p>
         <HeaderTitle>Restaurante</HeaderTitle> 
       </Header>
@@ -156,12 +169,12 @@ const doceCategory = restaurant.products && restaurant.products.filter( product 
                         <DescriptionContainer>
                           <Top>
                             <ProductTitle>{product.name}</ProductTitle>
-                            <ContainerContador><Contador>0</Contador></ContainerContador>
+                          <ContainerContador><Contador>0</Contador></ContainerContador>
                           </Top>
                             <Ingredients>{product.description}</Ingredients>
                                 <Bottom>
                                   <Price>R${product.price.toFixed(2)}</Price>
-                                  <ButtonAdd onClick={goToAddQuantity}>adicionar</ButtonAdd>
+                                  <ButtonAdd onClick={() => goToAddQuantity(product)}>adicionar</ButtonAdd>
                                 </Bottom>
                         </DescriptionContainer>
                     </ProductContainer>
@@ -183,7 +196,7 @@ const doceCategory = restaurant.products && restaurant.products.filter( product 
                             <Ingredients>{product.description}</Ingredients>
                                 <Bottom>
                                   <Price>R${product.price.toFixed(2)}</Price>
-                                  <ButtonAdd onClick={goToAddQuantity}>adicionar</ButtonAdd>
+                                  <ButtonAdd onClick={() => goToAddQuantity(product)}>adicionar</ButtonAdd>
                                 </Bottom>
                         </DescriptionContainer>
                     </ProductContainer>
@@ -205,7 +218,7 @@ const doceCategory = restaurant.products && restaurant.products.filter( product 
                             <Ingredients>{product.description}</Ingredients>
                                 <Bottom>
                                   <Price>R${product.price.toFixed(2)}</Price>
-                                  <ButtonAdd onClick={goToAddQuantity}>adicionar</ButtonAdd>
+                                  <ButtonAdd onClick={() => goToAddQuantity(product)}>adicionar</ButtonAdd>
                                 </Bottom>
                         </DescriptionContainer>
                     </ProductContainer>
@@ -227,7 +240,7 @@ const doceCategory = restaurant.products && restaurant.products.filter( product 
                             <Ingredients>{product.description}</Ingredients>
                                 <Bottom>
                                   <Price>R${product.price.toFixed(2)}</Price>
-                                  <ButtonAdd onClick={goToAddQuantity}>adicionar</ButtonAdd>
+                                  <ButtonAdd onClick={() => goToAddQuantity(product)}>adicionar</ButtonAdd>
                                 </Bottom>
                         </DescriptionContainer>
                     </ProductContainer>
@@ -249,7 +262,7 @@ const doceCategory = restaurant.products && restaurant.products.filter( product 
                             <Ingredients>{product.description}</Ingredients>
                                 <Bottom>
                                   <Price>R${product.price.toFixed(2)}</Price>
-                                  <ButtonAdd onClick={goToAddQuantity}>adicionar</ButtonAdd>
+                                  <ButtonAdd onClick={() => goToAddQuantity(product)}>adicionar</ButtonAdd>
                                 </Bottom>
                         </DescriptionContainer>
                     </ProductContainer>
@@ -271,7 +284,7 @@ const doceCategory = restaurant.products && restaurant.products.filter( product 
                             <Ingredients>{product.description}</Ingredients>
                                 <Bottom>
                                   <Price>R${product.price.toFixed(2)}</Price>
-                                  <ButtonAdd onClick={goToAddQuantity}>adicionar</ButtonAdd>
+                                  <ButtonAdd onClick={() => goToAddQuantity(product)}>adicionar</ButtonAdd>
                                 </Bottom>
                         </DescriptionContainer>
                     </ProductContainer>
@@ -293,7 +306,7 @@ const doceCategory = restaurant.products && restaurant.products.filter( product 
                             <Ingredients>{product.description}</Ingredients>
                                 <Bottom>
                                   <Price>R${product.price.toFixed(2)}</Price>
-                                  <ButtonAdd onClick={goToAddQuantity}>adicionar</ButtonAdd>
+                                  <ButtonAdd onClick={() => goToAddQuantity(product)}>adicionar</ButtonAdd>
                                 </Bottom>
                         </DescriptionContainer>
                     </ProductContainer>
@@ -315,7 +328,7 @@ const doceCategory = restaurant.products && restaurant.products.filter( product 
                             <Ingredients>{product.description}</Ingredients>
                                 <Bottom>
                                   <Price>R${product.price.toFixed(2)}</Price>
-                                  <ButtonAdd onClick={goToAddQuantity}>adicionar</ButtonAdd>
+                                  <ButtonAdd onClick={() => goToAddQuantity(product)}>adicionar</ButtonAdd>
                                 </Bottom>
                         </DescriptionContainer>
                     </ProductContainer>
@@ -337,7 +350,7 @@ const doceCategory = restaurant.products && restaurant.products.filter( product 
                             <Ingredients>{product.description}</Ingredients>
                                 <Bottom>
                                   <Price>R${product.price.toFixed(2)}</Price>
-                                  <ButtonAdd onClick={goToAddQuantity}>adicionar</ButtonAdd>
+                                  <ButtonAdd onClick={() => goToAddQuantity(product)}>adicionar</ButtonAdd>
                                 </Bottom>
                         </DescriptionContainer>
                     </ProductContainer>
