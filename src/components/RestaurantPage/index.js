@@ -43,21 +43,63 @@ function RestaurantPage() {
   }
 
   const filteredRestaurant = (id) => {
-    switch (id) {
-      case "Árabe":
-        if (filters.includes(id)) {
-          setFilters("")
-        } else {
+      if(id === "Árabe") {
+        if(filters !== "Árabe") {
           setFilters(id)
-        }    
-      case "Asiática":
-        setFilters(id)
-      // default:
-      //   if ()
-    }
-  }
+        } else {
+          setFilters("")
+        }
+      } if(id === "Asiática") {
+          if(filters !== "Asiática") {
+            setFilters(id)
+          } else {
+            setFilters("")
+          }
+      } if(id === "Hamburguer") {
+          if(filters !== "Hamburguer") {
+            setFilters(id)
+          } else {
+            setFilters("")
+          }
+      } if(id === "Italiana") {
+          if(filters !== "Italiana") {
+            setFilters(id)
+          } else {
+            setFilters("")
+          }
+      } if(id === "Sorvetes") {
+          if(filters !== "Sorvetes") {
+            setFilters(id)
+          } else {
+            setFilters("")
+          }
+      } if(id === "Baiana") {
+          if(filters !== "Baiana") {
+            setFilters(id)
+          } else {
+            setFilters("")
+          }
+      } if(id === "Carnes") {
+          if(filters !== "Carnes") {
+            setFilters(id)
+          } else {
+            setFilters("")
+          }
+      } if(id === "Petiscos") {
+          if(filters !== "Petiscos") {
+            setFilters(id)
+          } else {
+            setFilters("")
+          }
+      } if(id === "Mexicana") {
+          if(filters !== "Mexicana") {
+            setFilters(id)
+          } else {
+            setFilters("")
+          }
+      }
 
-  console.log(filters)
+  }
 
   return (
     <RestContainer>
@@ -72,13 +114,13 @@ function RestaurantPage() {
         <ScrollBar>
           <ItemScrollBar onClick={() => filteredRestaurant("Árabe")}>Árabe</ItemScrollBar>
           <ItemScrollBar onClick={() => filteredRestaurant("Asiática")}>Asiática</ItemScrollBar>
-          <ItemScrollBar>Hamburguer</ItemScrollBar>
-          <ItemScrollBar>Italiana</ItemScrollBar>
-          <ItemScrollBar>Sorvetes</ItemScrollBar>
-          <ItemScrollBar>Baiana</ItemScrollBar>
-          <ItemScrollBar>Carnes</ItemScrollBar>
-          <ItemScrollBar>Petiscos</ItemScrollBar>
-          <ItemScrollBar>Mexicana</ItemScrollBar>
+          <ItemScrollBar onClick={() => filteredRestaurant("Hamburguer")}>Hamburguer</ItemScrollBar>
+          <ItemScrollBar onClick={() => filteredRestaurant("Italiana")}>Italiana</ItemScrollBar>
+          <ItemScrollBar onClick={() => filteredRestaurant("Sorvetes")}>Sorvetes</ItemScrollBar>
+          <ItemScrollBar onClick={() => filteredRestaurant("Baiana")}>Baiana</ItemScrollBar>
+          <ItemScrollBar onClick={() => filteredRestaurant("Carnes")}>Carnes</ItemScrollBar>
+          <ItemScrollBar onClick={() => filteredRestaurant("Petiscos")}>Petiscos</ItemScrollBar>
+          <ItemScrollBar onClick={() => filteredRestaurant("Mexicana")}>Mexicana</ItemScrollBar>
         </ScrollBar>
         {restaurants !== 0 && restaurants.map((restaurant) => {
           if (filters !== "" && restaurant.category === filters) {
