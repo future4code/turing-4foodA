@@ -111,16 +111,13 @@ const doceCategory = restaurant.products && restaurant.products.filter( product 
   }
 })
 
-const goToCartPage = () => {
-  history.push("/car")
-}
 
   return (
     <Container>
       {showQuantity && <AddQuantity showQuantity={showQuantity} setShowQuantity={setShowQuantity} selectedProduct={product} restaurant={restaurant}/>}
       
       <Header>
-      <button onClick={goToCartPage}>carrinho</button>
+      {/* <button onClick={goToCartPage}>carrinho</button> */}
         <p onClick={goToRestaurantPage}><ArrowBackIosIcon /></p>
         <HeaderTitle>Restaurante</HeaderTitle> 
       </Header>

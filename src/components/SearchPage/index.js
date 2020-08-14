@@ -53,6 +53,8 @@ function SearchPage() {
         return restaurant.name.toLowerCase().includes(busca.toLowerCase()) ? true : false
       })
         setRestaurants(newRestaurants)
+    } else {
+         getRestaurants()
     }
     
   }
