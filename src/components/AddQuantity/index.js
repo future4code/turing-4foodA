@@ -1,28 +1,35 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {MainContainer, CardContainer, Select, ButtonAddToCart} from './Style';
-// import CartContext from '../../context/CardContext';
+import CartContext from '../../context/CartContext'
 
 function AddQuantity(props) {
-  const [select, setSelect] = useState("")
+  const [quantidadeSelecionada, setQuantidadeSelecionada] = useState(0)
 
   const selectedProduct = props.selectedProduct
+  const restaurant = props.restaurant
+  const cartContext = useContext(CartContext);
+
   const addToCart = () => {
-    // cartContext.dispatch({ type: "ADD_ITEM_TO_CART", product: selectedProduct })
+    if(quantidadeSelecionada > 0) {
+      cartContext.dispatch({ type: "ADICIONA_NO_CARRINHO", produto: selectedProduct, quantidadeSelecionada: quantidadeSelecionada, restauranteId: restaurant.id })
+      console.log(cartContext)
+  }
     props.setShowQuantity(!props.showQuantity);
+    setQuantidadeSelecionada(0)
 
   }
 
   const handleSelectChange = (e) => {
-    setSelect(e.target.value)
+    setQuantidadeSelecionada(e.target.value)
   }
 
-  console.log(selectedProduct)
+  console.log(cartContext.carrinho)
 
     return (
       <MainContainer>
           <CardContainer>
               <p>Selecione a quatidade desejada</p>
-              <Select value={select} onChange={handleSelectChange}>
+              <Select value={quantidadeSelecionada} onChange={handleSelectChange}>
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>

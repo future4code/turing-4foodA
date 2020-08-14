@@ -51,7 +51,7 @@ function Router() {
                 <Route exact path = "/profile-page/edit/address">
                     <ProfileAddressPage/>
                 </Route>
-                <Route exact path = "/">
+                <Route exact path = "/car">
                     <CarPage/>
                 </Route>
             </Switch>
