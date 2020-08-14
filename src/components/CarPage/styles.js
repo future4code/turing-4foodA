@@ -70,9 +70,137 @@ main {
   justify-content: flex-start;
   padding: 0 1rem 0 1rem;
 }
+.info-rest {
+  
+  .name-rest {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 1rem;
+    font-family: Roboto;
+    font-size: 1rem;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.39px;
+    color: #e8222e;
+    margin-top: 1rem;
+  }
+  .endereco-rest {
+  display: flex;
+  justify-content: flex-start;
+  height: 1.125rem;
+  padding-left: 1rem;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.39px;
+  color: #b8b8b8;
+  }
+  .time-rest {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 1rem;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.39px;
+  color: #b8b8b8;
+  
+  }
+}
+
 .text-car {
-  width: 22.5rem;
-  height: 2.625rem;
+  .card-pedidos {
+    height: 7rem;
+  border-radius: 8px;
+  border: solid 1px #b8b8b8;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  }
+  img {
+    background-image: url(${props => props.BackgroundImage});
+    background-size: cover;
+    background-position: center;
+    height: 7rem;
+    width: 6rem;
+    border-top-left-radius: 8px;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    .title {
+    font-family: Roboto;
+    font-size: 1rem;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.39px;
+    color: #e8222e;
+  }
+  .description {
+  padding-left: 7rem;
+  font-family: 'Roboto';
+  font-size: 0.75rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.29px;
+  color: #b8b8b8;
+  padding-top: 0.5rem;
+
+  }
+  .price {
+
+  font-family: 'Roboto';
+  font-size: 1rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.39px;
+  color: #000000;
+  padding-top: 0.25rem;
+  padding-left: 0.5rem;
+
+  }
+  li {
+    list-style: none;
+  }
+  }
+
+  button {
+  font-family: 'Roboto';
+  font-size: 0.75rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.29px;
+  text-align: center;
+  color: #e02020;
+  width: 5.625rem;
+  height: 1.938rem;
+  border-radius: 15px 0px 10px 0px;
+  border: solid 1px #e02020;
+  margin-left: 15.875rem;
+  }
+  .quantity {
+  width: 2.063rem;
+  height: 2.063rem;
+  border: solid 1px #e8222e;
+  border-radius: 0px 11px 0px 10px;
+  margin-left: 19.438rem;
+  padding: 0;
+  }
 }
 .Text {
   width: 18.5rem;
@@ -157,7 +285,6 @@ main {
   display: flex;
   justify-content: flex-start;
   margin: 0;
-  padding-top: 1.5rem;
 }
 .linha {
   width: 20.5rem;
@@ -171,7 +298,8 @@ main {
     background-color: rgba(232, 34, 46, 0.5);
     border: none;
     margin-right: 1.5rem;
-    margin-top: 4.063rem;
+    margin-top: 3.063rem;
+    margin-bottom: 2rem;
   }
 }
 

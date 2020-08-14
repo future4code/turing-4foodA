@@ -89,7 +89,14 @@ function ProfileAddressPage() {
 
     const getFullAddress = () => {
       const token = window.localStorage.getItem('token');
+
       axios.get(`${baseURL}/profile/address`, {headers: {auth:token}}).then((response) => {
+        onChange("street", response.data.address.street)
+        onChange("number", response.data.address.number)
+        onChange("neighbourhood", response.data.address.neighbourhood)
+        onChange("city", response.data.address.city)
+        onChange("state", response.data.address.state)
+        onChange("complement", response.data.address.complement)
         setForm(response.data.address)
     }).catch(()=> {
         alert("Erro ao mostrar endereço!")
@@ -120,7 +127,7 @@ function ProfileAddressPage() {
       const Back =() => {
           history.push('/profile-page')
       }
-    
+
     return(
         <DivSignup>
             <DivArrowBack>
