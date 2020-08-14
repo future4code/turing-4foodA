@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const RestContainer = styled.div`
     display: flex;
@@ -77,7 +77,7 @@ export const ProductTitle = styled.p `
     margin-left: 1rem;
     width: 18.5rem;
     height: 1.125rem;
-    font-family: Roboto;
+    font-family: 'Roboto';
     font-size: 1rem;
     letter-spacing: -0.39px;
 `
@@ -89,9 +89,14 @@ export const ProductDescription = styled.div `
     justify-content: space-between;
     margin-left: 1rem;
     margin-right: 1rem;
-    font-family: Roboto;
+    font-family: 'Roboto';
     font-size: 1rem;
     letter-spacing: -0.39px;
 `
-
+export const ContainerFooter = styled.div `
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+`;
 

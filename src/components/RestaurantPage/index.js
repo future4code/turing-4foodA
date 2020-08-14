@@ -3,8 +3,9 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 import {RestContainer, Header, Form, Button, Image, Input, ScrollBar, ItemScrollBar, ProductContainer, ProductTitle, 
-ProductDescription, MainContainer} from './Style';
+ProductDescription, MainContainer, ContainerFooter } from './Style';
 import SearchIcon from '@material-ui/icons/Search';
+import Footer from './../Footer';
 
 
 function RestaurantPage() {
@@ -31,8 +32,6 @@ function RestaurantPage() {
         console.log(error.response)
       }
   };
-
-  console.log(restaurants)
 
   const goToSearchPage = () => {
     history.push("/search-restaurant")
@@ -102,6 +101,7 @@ function RestaurantPage() {
   }
 
   return (
+    <>
     <RestContainer>
       <Header>
       <p>Ifuture</p> 
@@ -149,6 +149,10 @@ function RestaurantPage() {
         })}
       </MainContainer>
     </RestContainer>
+    <ContainerFooter>
+      <Footer/>
+    </ContainerFooter>
+    </>
   );
 }
 
