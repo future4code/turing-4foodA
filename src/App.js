@@ -12,9 +12,9 @@ function App() {
   const [state, dispatch] = useReducer(storeReducer, initialState)
   return (
     <div className="App">
-      <CartContext.Provider value={{ cart: state.cart, dispatch: dispatch }}>
-      <Router />
-      <GlobalStyle />
+      <CartContext.Provider value={{ carrinho: state.carrinho, dispatch: dispatch }}>
+        <Router />
+        <GlobalStyle />
       </CartContext.Provider>
     </div>
   );

@@ -1,30 +1,32 @@
 export const initialState = {
-  cart: []
+  carrinho: []
 }
 
-export const storeReducer = (state, action) => {
+export const storeReducer = (state, action) => {console.log(state.carrinho)
   switch (action.type) {
-    case "ADD_ITEM_TO_CART":
-      const productInCart = state.cart.findIndex(product => {
-        return product.id === action.product.id
+    case "ADICIONA_NO_CARRINHO":
+      const produtosCarrinho = state.carrinho.findIndex(produto => {
+        return produto.id === action.produto.id
       })
-
-      let newCart
-
-      if (productInCart === -1) {
-        newCart = [...state.cart, { ...action.product, quantity: 1 }]
+      
+      let novoCarrinho
+      console.log(produtosCarrinho === -1)
+      if (produtosCarrinho === -1) {
+        novoCarrinho = [...state.carrinho, { ...action.produto, quantity: action.quantidadeSelecionada, restauranteId: action.restauranteId }]
       } else {
-        newCart = state.cart.map(product => {
-          if(product.id === action.product.id) {
+        novoCarrinho = state.carrinho.map(produto => {
+          if(produto.id === action.produto.id) {
             return {
-              ...product,
-              quantity: product.quantity + 1
+              ...produto,
+              quantity: action.quantidadeSelecionada
             }
           }
-          return product
+          return produto
         })
       }
-      return { ...state, cart: newCart }
+      console.log(novoCarrinho)
+      return { ...state, carrinho: novoCarrinho }
+
       case "REMOVE_ITEM_FROM_CART": {
         const newCart = state.cart.filter(product => {
           return product.id !== action.productId

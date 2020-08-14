@@ -1,11 +1,16 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import CartContext from '../../context/CartContext'
 
 const CarPage = () => {
+
+  const cartContext = useContext(CartContext);
+
+  console.log(cartContext)
 
   const [pedidos, setPedidos] = useState({
     "id": "3vcYYSOEf8dKeTPd7vHe",
@@ -72,7 +77,7 @@ const CarPage = () => {
               <FormControlLabel value="cartao-credito" control={<Radio />} label="Cartão de Crédito" />
             </RadioGroup>
           </FormControl>
-        <button className='confirm' onClick={''}>Confirmar</button>
+        <button className='confirm'>Confirmar</button>
       </form>
     </main>
   </div>
