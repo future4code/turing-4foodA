@@ -11,6 +11,7 @@ function RestaurantDetailPage() {
   const history = useHistory();
   const [restaurant, setRestaurant] = useState({})
   const [showQuantity, setShowQuantity] = useState(false)
+  const [product, setProduct] = useState({})
 
   const pathParams = useParams();
 
@@ -38,9 +39,10 @@ function RestaurantDetailPage() {
     history.push("/restaurant")
 }
 
-  const goToAddQuantity = () => {
+  const goToAddQuantity = (product) => {
     // history.push("/restaurant/details/quantity")
     setShowQuantity(!showQuantity)
+    setProduct(product)
   }
 
   const salgadoCategory = restaurant.products && restaurant.products.filter( product => {
@@ -101,11 +103,10 @@ const doceCategory = restaurant.products && restaurant.products.filter( product 
     return true
   }
 })
-
   
   return (
     <Container>
-      {showQuantity && <AddQuantity showQuantity={showQuantity} setShowQuantity={setShowQuantity} />}
+      {showQuantity && <AddQuantity showQuantity={showQuantity} setShowQuantity={setShowQuantity} selectedProduct={product}/>}
       <Header>
         <p onClick={goToRestaurantPage}><ArrowBackIosIcon /></p>
         <HeaderTitle>Restaurante</HeaderTitle> 
@@ -119,7 +120,7 @@ const doceCategory = restaurant.products && restaurant.products.filter( product 
               <Description>{restaurant.deliveryTime}min</Description>
               <Description>Frete R${restaurant.shipping && restaurant.shipping.toFixed(2)}</Description>
           </RestaurantDescription>
-          <Description>{restaurant.address}</Description>            
+          <Description>{restaurant.address}</Description>    
         </div>
         <SectionContainer>
         {refeicaoCategory && refeicaoCategory.length !== 0 ? <SectionTitle>Refeição</SectionTitle> : <></>}
@@ -136,7 +137,7 @@ const doceCategory = restaurant.products && restaurant.products.filter( product 
                             <Ingredients>{product.description}</Ingredients>
                                 <Bottom>
                                   <Price>R${product.price.toFixed(2)}</Price>
-                                  <ButtonAdd onClick={goToAddQuantity}>adicionar</ButtonAdd>
+                                  <ButtonAdd onClick={() => goToAddQuantity(product)}>adicionar</ButtonAdd>
                                 </Bottom>
                         </DescriptionContainer>
                     </ProductContainer>
