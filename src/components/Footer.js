@@ -1,8 +1,11 @@
 import React from 'react'
-import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import HomeIcon from '@material-ui/icons/Home';
-import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import PersonIcon from '@material-ui/icons/Person';
 import styled from 'styled-components'
+import { useHistory } from "react-router-dom";
+
+const urlAtual = window.location.href;
 
 const FooterContainer = styled.div`
     height: 3.062rem;
@@ -15,23 +18,38 @@ const FooterContainer = styled.div`
 `
 
 const HomeIconFooter = styled(HomeIcon)`
-    color: #BDBDBD;
+   color: ${urlAtual === 'http://localhost:3000/restaurant' ? 'red' : '#BDBDBD'};
 `
 
-const ShoppingCartOutlinedIconFooter = styled(ShoppingCartOutlinedIcon)`
-    color: #BDBDBD;
+const ShoppingCartIconFooter = styled(ShoppingCartIcon)`
+    color: ${urlAtual === 'http://localhost:3000/car' ? 'red' : '#BDBDBD'};
 `
 
-const PersonOutlineIconFooter = styled(PersonOutlineIcon)`
-    color: #BDBDBD;
+const PersonIconFooter = styled(PersonIcon)`
+    color: ${urlAtual === 'http://localhost:3000/profile-page' ? 'red' : '#BDBDBD'};
 `
 
 function Footer(props){
+    
+    const history = useHistory();
+
+    const goToRestaurantPage = () => {
+        history.push("/restaurant")
+    }
+
+    const goToCarPage = () => {
+        history.push("/car")
+    }
+
+    const goToProfilePage = () => {
+        history.push("/profile-page")
+    }
+
     return(
         <FooterContainer>
-            <HomeIconFooter fontSize="large" cursor="pointer" color={props.color}/>
-            <ShoppingCartOutlinedIconFooter color="disabled" fontSize="large" cursor="pointer"/>
-            <PersonOutlineIconFooter color="disabled" fontSize="large" cursor="pointer"/>
+            <HomeIconFooter fontSize="large" cursor="pointer" color={props.color} onClick={goToRestaurantPage}/>
+            <ShoppingCartIconFooter fontSize="large" cursor="pointer" color={props.color} onClick={goToCarPage}/>
+            <PersonIconFooter fontSize="large" cursor="pointer" color={props.color} onClick={goToProfilePage}/>
         </FooterContainer>
     )
 }

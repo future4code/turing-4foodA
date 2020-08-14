@@ -72,6 +72,21 @@ function ProfileAddressPage() {
       }
   },[history])
 
+  const { form, onChange, setForm } = useForm({
+    street: address.street,
+    number: address.number,
+    neighbourhood: address.neighbourhood,
+    city: address.city,
+    state: address.state,
+    complement: address.complement
+  });
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+
+    onChange(name, value);
+  };
+
     const getFullAddress = () => {
       const token = window.localStorage.getItem('token');
 
@@ -82,25 +97,11 @@ function ProfileAddressPage() {
         onChange("city", response.data.address.city)
         onChange("state", response.data.address.state)
         onChange("complement", response.data.address.complement)
+        setForm(response.data.address)
     }).catch(()=> {
         alert("Erro ao mostrar endereço!")
     })
   }
-
-    const { form, onChange } = useForm({
-        street: address.street,
-        number: address.number,
-        neighbourhood: address.neighbourhood,
-        city: address.city,
-        state: address.state,
-        complement: address.complement
-      });
-
-      const handleInputChange = (event) => {
-        const { name, value } = event.target;
-    
-        onChange(name, value);
-      };
 
       const putAddress = (event) => {
         event.preventDefault();
@@ -113,6 +114,7 @@ function ProfileAddressPage() {
             state: form.state,
             complement: form.complement
         }
+        console.log(body)
         axios.put(`${baseURL}/address`,body,{headers: {auth:token}}).then((response) => {
             window.localStorage.setItem('token', response.data.token)
             alert("Endereço criado com sucesso!")
@@ -125,8 +127,6 @@ function ProfileAddressPage() {
       const Back =() => {
           history.push('/profile-page')
       }
-
-      console.log(form.street)
 
     return(
         <DivSignup>

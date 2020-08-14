@@ -87,21 +87,20 @@ function ProfileEditPage() {
 }
 
 const onChange = (event) => {
-  setProfile(event.target.value)
+  setProfile({...profile, [event.target.name]:event.target.value})
 }
 
 const updateProfile = (event) => {
   event.preventDefault();
   const token = window.localStorage.getItem("token")
   const body = {
-    name: profile.name,
-    email: profile.email,
-    cpf: profile.cpf
+    "name": profile.name,
+    "email": profile.email,
+    "cpf": profile.cpf
   }
-  axios.put(`${baseURL}/profile`,{headers: {
+  axios.put(`${baseURL}/profile`,body,{headers: {
       auth: token
   }}).then((response)=>{
-    window.localStorage.setItem('token', response.data.token)
     alert("Perfil atualizado com sucesso!")
     history.push(`/profile-page`);
   }).catch((error) => {
@@ -123,6 +122,7 @@ const updateProfile = (event) => {
             label="Nome"
             placeholder={profile.name}
             margin="normal"
+            name="name"
             value={profile.name}
             InputLabelProps={{
               shrink: true,
@@ -136,6 +136,7 @@ const updateProfile = (event) => {
           <StyledTextField 
             label="E-mail"
             placeholder={profile.email}
+            name="email"
             value={profile.email}
             margin="normal"
             InputLabelProps={{
@@ -151,6 +152,7 @@ const updateProfile = (event) => {
               label="CPF"
               placeholder={profile.cpf}
               margin="normal"
+              name="cpf"
               value={profile.cpf}
               InputLabelProps={{
                 shrink: true,

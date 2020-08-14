@@ -18,7 +18,7 @@ function Router() {
     return(
         <BrowserRouter>
             <Switch>
-                <Route exact path="/">
+                <Route exact path="/home">
                     <Home/>
                 </Route>
                 <Route exact path = "/login">
@@ -51,7 +51,7 @@ function Router() {
                 <Route exact path = "/profile-page/edit/address">
                     <ProfileAddressPage/>
                 </Route>
-                <Route exact path = "/car">
+                <Route exact path = "/">
                     <CarPage/>
                 </Route>
             </Switch>
