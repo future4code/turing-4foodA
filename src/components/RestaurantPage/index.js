@@ -10,6 +10,7 @@ import SearchIcon from '@material-ui/icons/Search';
 function RestaurantPage() {
   const history = useHistory();
   const [restaurants, setRestaurants] = useState([])
+  const [filters, setFilters] = useState("")
 
   const token = window.localStorage.getItem('token');
 
@@ -41,6 +42,23 @@ function RestaurantPage() {
     history.push(`/restaurant/details/${restaurantId}`)
   }
 
+  const filteredRestaurant = (id) => {
+    switch (id) {
+      case "Árabe":
+        if (filters.includes(id)) {
+          setFilters("")
+        } else {
+          setFilters(id)
+        }    
+      case "Asiática":
+        setFilters(id)
+      // default:
+      //   if ()
+    }
+  }
+
+  console.log(filters)
+
   return (
     <RestContainer>
       <Header>
@@ -52,8 +70,8 @@ function RestaurantPage() {
         <Input type="search" placeholder="Restaurante" />
         </Form>
         <ScrollBar>
-          <ItemScrollBar>Árabe</ItemScrollBar>
-          <ItemScrollBar>Asiática</ItemScrollBar>
+          <ItemScrollBar onClick={() => filteredRestaurant("Árabe")}>Árabe</ItemScrollBar>
+          <ItemScrollBar onClick={() => filteredRestaurant("Asiática")}>Asiática</ItemScrollBar>
           <ItemScrollBar>Hamburguer</ItemScrollBar>
           <ItemScrollBar>Italiana</ItemScrollBar>
           <ItemScrollBar>Sorvetes</ItemScrollBar>
@@ -63,16 +81,29 @@ function RestaurantPage() {
           <ItemScrollBar>Mexicana</ItemScrollBar>
         </ScrollBar>
         {restaurants !== 0 && restaurants.map((restaurant) => {
-          return (
-                <ProductContainer onClick={() => sendDetailPage(restaurant.id)} key={restaurant.id}>
-                  <Image BackgroundImage={restaurant.logoUrl} />
-                  <ProductTitle>{restaurant.name}</ProductTitle>
-                  <ProductDescription>
-                    <p>{restaurant.deliveryTime} min</p>
-                    <p>R${restaurant.shipping.toFixed(2)}</p>
-                  </ProductDescription>
-                </ProductContainer>
-          );
+          if (filters !== "" && restaurant.category === filters) {
+            return (
+                  <ProductContainer onClick={() => sendDetailPage(restaurant.id)} key={restaurant.id}>
+                    <Image BackgroundImage={restaurant.logoUrl} />
+                    <ProductTitle>{restaurant.name}</ProductTitle>
+                    <ProductDescription>
+                      <p>{restaurant.deliveryTime} min</p>
+                      <p>R${restaurant.shipping.toFixed(2)}</p>
+                    </ProductDescription>
+                  </ProductContainer>
+            );
+          } if (filters === "") {
+            return (
+                  <ProductContainer onClick={() => sendDetailPage(restaurant.id)} key={restaurant.id}>
+                    <Image BackgroundImage={restaurant.logoUrl} />
+                    <ProductTitle>{restaurant.name}</ProductTitle>
+                    <ProductDescription>
+                      <p>{restaurant.deliveryTime} min</p>
+                      <p>R${restaurant.shipping.toFixed(2)}</p>
+                    </ProductDescription>
+                  </ProductContainer>
+            );
+          } 
         })}
       </MainContainer>
     </RestContainer>

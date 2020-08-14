@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { useHistory, useParams  } from "react-router-dom";
 import {Image, RestContainer, Header, HeaderTitle, RestaurantTitle, RestaurantDescription, SectionContainer, 
 ProductContainer, ImageProduct, DescriptionContainer, Ingredients, Description, SectionTitle, Bottom,
-Price, ButtonAdd, ProductTitle, Container} from './Style';
+Price, ButtonAdd, ProductTitle, Container, Top, ContainerContador, Contador} from './Style';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import AddQuantity from '../AddQuantity/index';
 import axios from 'axios';
@@ -153,7 +153,10 @@ const doceCategory = restaurant.products && restaurant.products.filter( product 
                           {product.photoUrl && <ImageProduct BackgroundImage={product.photoUrl} />}
                         </div>
                         <DescriptionContainer>
+                          <Top>
                             <ProductTitle>{product.name}</ProductTitle>
+                            <ContainerContador><Contador>0</Contador></ContainerContador>
+                          </Top>
                             <Ingredients>{product.description}</Ingredients>
                                 <Bottom>
                                   <Price>R${product.price.toFixed(2)}</Price>
